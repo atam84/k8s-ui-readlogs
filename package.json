@@ -10,9 +10,12 @@
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "@kubernetes/client-node": "^0.11.0",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "meteor-node-stubs": "^0.4.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "popper.js": "^1.16.0"
   },
   "meteor": {
     "mainModule": {
