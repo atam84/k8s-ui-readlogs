@@ -24,12 +24,12 @@ Meteor.methods({
           return res.body;
         });
     },
-    'getNamespacedPod': () => {
-      console.log('*** Serving pods in default namespaces');
-      return k8sApi.listNamespacedPod('default').then((res) => {
+    'getNamespacedPods': () => {
+      console.log('*** Serving pods in kube-system namespaces');
+      return k8sApi.listNamespacedPod('kube-system').then((res) => {
         return res.body;
       });
     },
-    
+
 
 });

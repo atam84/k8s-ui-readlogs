@@ -19,7 +19,7 @@
        <tbody>
        {{#each item in get_listNodes}}
          <tr>
-           <td><a href="/node">Details</a></td>
+           <td><a href="/node/{{item.serverName}}">Details</a></td>
            <td>{{item.serverName}}</td>
            <td>{{item.createDate}} {{item.createTime}}</td>
            <td>{{item.capacity.cpu}}</td>

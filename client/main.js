@@ -16,6 +16,7 @@ import '../imports/api/client/helpers';
 import '../imports/api/client/templates-helpers'
 import '../imports/ui/namespaces/namespaces';
 import '../imports/ui/nodes/nodes';
+import '../imports/ui/pods/pods';
 
 /**
  * MainMenu click event that forward to the rigth route using href
