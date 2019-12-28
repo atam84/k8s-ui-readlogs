@@ -1,0 +1,25 @@
+<template name='List_namespaces'>
+    <h4>Namespaces</h4>
+    <table class="table table-striped table-sm">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Namespace</th>
+            <th>uid</th>
+            <th>creation</th>
+            <th>status</th>
+         </tr>
+       </thead>
+       <tbody>
+       {{#each item in get_listNameSpaces}}
+         <tr>
+           <td><a href="/namespace/{{item.metadata.name}}">Get pods</a></td>
+           <td>{{item.metadata.name}}</td>
+           <td>{{item.metadata.uid}}</td>
+           <td>{{item.metadata.creationTimestamp}}</td>
+           <td><span class="badge badge-success">{{item.status.phase}}</span></td>
+         </tr>
+       {{/each}}
+       </tbody>
+    </table>
+</template>

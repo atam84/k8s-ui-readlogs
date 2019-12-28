@@ -23,5 +23,13 @@ Meteor.methods({
         return k8sApi.listNode().then((res) => {
           return res.body;
         });
-    }
+    },
+    'getNamespacedPod': () => {
+      console.log('*** Serving pods in default namespaces');
+      return k8sApi.listNamespacedPod('default').then((res) => {
+        return res.body;
+      });
+    },
+    
+
 });

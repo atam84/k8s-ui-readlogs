@@ -4,45 +4,28 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict'
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { _ } from 'underscore';
+
+_display = new ReactiveVar();
+_data = new ReactiveDict();
 
 import './main.html';
-import '../lib/routes.js';
+import '../lib/routes';
 
+import '../imports/api/client/helpers';
+import '../imports/api/client/templates-helpers'
+import '../imports/ui/namespaces/namespaces';
+import '../imports/ui/nodes/nodes';
 
-const _display = new ReactiveVar();
-const _data = new ReactiveDict();
-
-
-Template.List_namespaces.helpers({
-  get_listNameSpaces() {
-    return _data.get('namespaces');
-  },
-});
-
+/**
+ * MainMenu click event that forward to the rigth route using href
+ */
 Template.mainMenu.events({
-  'click .get-namespaces': (e, instance) => {
+  'click .get-cluster-res': (e) => {
     e.preventDefault();
-    console.log("Ask for namespaces list");
-    Meteor.call('getNameSpaces', (err, res) => {
-      if (err) {
-        console.log("ERROR : " + err);
-      } else {
-        console.dir(res.items);
-        _data.set('namespaces', res.items);
-      }
-    });
+    let _path = e.target.pathname;
+    console.log("*** Selected target : " + _path);
+    goTo(_path);
   },
-  'click .get-cluster': (e, instance) => {
-    e.preventDefault();
-    console.log("Ask for cluster information");
-    Meteor.call('getNodes', (err, res) => {
-      if (err) {
-        console.log("ERROR : " + err);
-      } else {
-        console.dir(res);
-        _data.set('cluster', res);
-      }
-    });
-  }
 });
 

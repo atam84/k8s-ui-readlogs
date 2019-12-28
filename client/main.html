@@ -46,25 +46,25 @@
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">
+          <a class="nav-link active get-cluster-res" href="/">
             <span data-feather="home"></span>
             Dashboard <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link get-cluster" href="/cluster">
+          <a class="nav-link get-cluster-res" href="/cluster">
             <span data-feather="file"></span>
             Cluster
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link get-namespaces" href="/namespaces">
+          <a class="nav-link get-cluster-res" href="/namespaces">
             <span data-feather="shopping-cart"></span>
             Namespaces
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link get-pods" href="#">
+          <a class="nav-link get-cluster-res" href="/pods">
             <span data-feather="users"></span>
             Pods
           </a>
@@ -126,28 +126,4 @@
   </main>
 </template>
 
-<template name='List_namespaces'>
-  <h4>Namespaces</h4>
-  <table class="table table-striped table-sm">
-    <thead>
-       <tr>
-          <th>#</th>
-          <th>Namespace</th>
-          <th>uid</th>
-          <th>creation</th>
-          <th>status</th>
-       </tr>
-     </thead>
-     <tbody>
-     {{#each item in get_listNameSpaces}}
-       <tr>
-         <td><a href="/namespace/{{item.metadata.name}}">Get pods</a></td>
-         <td>{{item.metadata.name}}</td>
-         <td>{{item.metadata.uid}}</td>
-         <td>{{item.metadata.creationTimestamp}}</td>
-         <td>{{item.status.phase}}</td>
-       </tr>
-     {{/each}}
-     </tbody>
-  </table>
-</template>
+
