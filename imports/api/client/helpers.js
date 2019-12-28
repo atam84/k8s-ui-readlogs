@@ -1,19 +1,27 @@
 import { _ } from 'underscore'
+import { isUndefined } from 'util';
 
-askFor = (action, key='trash', path="/", _debug=false) => {
+askFor = (action, key='trash', path="/", _objParams=undefined) => {
     console.log("Ask for " + action + " => " + path);
-    Meteor.call(action, (err, res) => {
-        if (err) {
-            console.log("ERROR : " + err);
-        } else {
-            if (_debug) {
-                console.log("Asl for : " + action);
-                console.log("  Path : " + path);
-                console.dir(res.items);
-            } 
-          _data.set(key, res.items);
-        }
-    });
+    if (isUndefined(_objParams)) {
+        Meteor.call(action, (err, res) => {
+            if (err) {
+                console.log("ERROR : " + err);
+            } else {
+                _data.set(key, res.items);
+            }
+        });
+    } else {
+        Meteor.call(action, _objParams, (err, res) => {
+            if (err) {
+                console.log("ERROR : " + err);
+            } else {
+                console.log(' Meteor.call : ');
+                console.dir(res);
+                _data.set(key, res.items);
+            }
+        });
+    }
     return _data.get(key);
 }
 

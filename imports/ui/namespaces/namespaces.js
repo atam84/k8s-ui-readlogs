@@ -6,9 +6,9 @@ import './namespaces.html';
 
 Template.List_namespaces.created = (_debug=true) => {
     console.log("Ask for namespaces list, trigger autoreload data.");
-    askFor('getNameSpaces', 'namespaces', '/namespaces', true);
+    askFor('getNameSpaces', 'namespaces', '/namespaces');
     updateNamespace = Meteor.setInterval(() => {
-        askFor('getNameSpaces', 'namespaces', '/namespaces', true);
+        askFor('getNameSpaces', 'namespaces', '/namespaces');
     }, 5000);
 }
 

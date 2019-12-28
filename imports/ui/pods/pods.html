@@ -1,27 +1,88 @@
 <template name='List_namespacePods'>
-    {{#with getNamespacePods}}
-    {{/with}}
-    <h4>Cluster</h4>
+    <h4>Namespace: {{getNamespace}}</h4>
     <table class="table table-striped table-sm">
-      <thead>
-         <tr>
-            <th>#</th>
-            <th>Namespace</th>
-            <th>creation</th>
-            <th>cpu</th>
-            <th>ram</th>
-            <th>Max pods</th>
-            <th>arch</th>
-            <th>runtime</th>
-            <th>os</th>
-            <th>Kernel</th>
-            <th>status</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr>
-
-         </tr>
-       </tbody>
+        <thead>
+            <tr>
+                <th>pod</th>
+                <th>NS</th>
+                <th>Creation</th>
+                <th>Containers</th>
+                <th>dnsPolicy</th>
+                <th>restartPolicy</th>
+                <th>Node</th>
+                <th>Host IP</th>
+                <th>QOS</th>
+                <th>start</th>
+                <th>status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each item in getNamespacePods}}
+            <tr>
+                <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                <td>{{item.metadata.namespace}}</td>
+                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                <td>{{arrayCount item.spec.containers}}</td>
+                <td>{{item.spec.dnsPolicy}}</td>
+                <td>{{item.spec.restartPolicy}}</td>
+                <td>{{item.spec.nodeName}}</td>
+                <td>{{item.status.hostIP}}</td>
+                <td>{{item.status.qosClass}}</td>
+                <td>{{dateAndTime item.status.startTime}}</td>
+                <td>{{item.status.phase}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
     </table>
+</template>
+
+<template name='List_allPods'>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>pod</th>
+                <th>NS</th>
+                <th>Creation</th>
+                <th>Containers</th>
+                <th>dnsPolicy</th>
+                <th>restartPolicy</th>
+                <th>Node</th>
+                <th>Host IP</th>
+                <th>QOS</th>
+                <th>start</th>
+                <th>status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each item in getAllPods}}
+            <tr>
+                <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                <td><a href='/pods/{{item.metadata.namespace}}'>{{item.metadata.namespace}}</a></td>
+                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                <td>{{arrayCount item.spec.containers}}</td>
+                <td>{{item.spec.dnsPolicy}}</td>
+                <td>{{item.spec.restartPolicy}}</td>
+                <td>{{item.spec.nodeName}}</td>
+                <td>{{item.status.hostIP}}</td>
+                <td>{{item.status.qosClass}}</td>
+                <td>{{dateAndTime item.status.startTime}}</td>
+                <td>{{item.status.phase}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name='pod_Logs'>
+    Pod logs
+    <div class="row" style="height: 750px;" >
+        <div class="col-sm border rounded h-100 d-inline-block" style="overflow-y: auto; overflow-x: auto;">
+            <pre>
+                <code>
+                {{getPodLogs}}
+                </code>
+            </pre>
+        </div>
+    </div>
+    
 </template>

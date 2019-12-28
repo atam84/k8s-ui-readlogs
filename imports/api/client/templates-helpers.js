@@ -28,6 +28,9 @@ Template.registerHelper("dateAndTime",function(_str_date){
     return dateAndTime(_str_date);
 });
 
+Template.registerHelper("arrayCount", function(_arrayCount){
+    return _arrayCount.length;
+});
 
 Template.registerHelper("selectClass",function(_value){
     let _classes = 'bg-success text-white';

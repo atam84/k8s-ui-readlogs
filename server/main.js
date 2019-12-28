@@ -24,12 +24,23 @@ Meteor.methods({
           return res.body;
         });
     },
-    'getNamespacedPods': () => {
-      console.log('*** Serving pods in kube-system namespaces');
-      return k8sApi.listNamespacedPod('kube-system').then((res) => {
+    'getNamespacedPods': (_objParms) => {
+      console.log('*** Serving pods in ' + _objParms.namespace + ' namespaces');
+      return k8sApi.listNamespacedPod( _objParms.namespace).then((res) => {
         return res.body;
       });
     },
-
+    'getAllPods': (_objParms) => {
+      console.log('*** Serving pods in all namespaces');
+      return k8sApi.listPodForAllNamespaces().then((res) => {
+        return res.body;
+      });
+    },
+    'getPodLogs': (_objParms) => {
+      console.log('*** Serving logs for ' + _objParms.podName + ' in ' + _objParms.namespace + ' namespaces');
+      return k8sApi.readNamespacedPodLog(_objParms.podName, _objParms.namespace).then((res) => {
+        return { 'items': res.body } ;
+      });
+    },
 
 });

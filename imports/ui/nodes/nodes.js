@@ -96,9 +96,9 @@ selectedNode = (_nodeName, _clusterArray) => {
 
 getClusterNodes = (refreshInterval=5000, _debug) => {
     console.log("Ask for cluster list, trigger autoreload data.");
-    askFor('getNodes', 'cluster', '/cluster', true);
+    askFor('getNodes', 'cluster', '/cluster');
     updateCluster = Meteor.setInterval(() => {
-        askFor('getNodes', 'cluster', '/cluster', true);
+        askFor('getNodes', 'cluster', '/cluster');
     }, refreshInterval);
 }
 

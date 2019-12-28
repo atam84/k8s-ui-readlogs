@@ -1,0 +1,184 @@
+{
+    "metadata": {
+      "annotations": {
+        "cni.projectcalico.org/podIP": "192.168.204.200/32",
+        "scheduler.alpha.kubernetes.io/critical-pod": ""
+      },
+      "creationTimestamp": "2019-12-19T23:22:51.000Z",
+      "generateName": "calico-kube-controllers-74c9747c46-",
+      "labels": {
+        "k8s-app": "calico-kube-controllers",
+        "pod-template-hash": "74c9747c46"
+      },
+      "name": "calico-kube-controllers-74c9747c46-w7psr",
+      "namespace": "kube-system",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "ReplicaSet",
+          "name": "calico-kube-controllers-74c9747c46",
+          "uid": "78177e6e-7d9d-42fa-a4ca-8cc1fef227f3"
+        }
+      ],
+      "resourceVersion": "393643",
+      "selfLink": "/api/v1/namespaces/kube-system/pods/calico-kube-controllers-74c9747c46-w7psr",
+      "uid": "b6f3d45d-f965-4f1e-b59d-1c0a3c81fbc9"
+    },
+    "spec": {
+      "containers": [
+        {
+          "env": [
+            {
+              "name": "ENABLED_CONTROLLERS",
+              "value": "node"
+            },
+            {
+              "name": "DATASTORE_TYPE",
+              "value": "kubernetes"
+            }
+          ],
+          "image": "calico/kube-controllers:v3.10.2",
+          "imagePullPolicy": "IfNotPresent",
+          "name": "calico-kube-controllers",
+          "readinessProbe": {
+            "exec": {
+              "command": [
+                "/usr/bin/check-status",
+                "-r"
+              ]
+            },
+            "failureThreshold": 3,
+            "periodSeconds": 10,
+            "successThreshold": 1,
+            "timeoutSeconds": 1
+          },
+          "resources": {},
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "calico-kube-controllers-token-xsptk",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "nodeName": "k8s-master01.cluster.local",
+      "nodeSelector": {
+        "beta.kubernetes.io/os": "linux"
+      },
+      "priority": 2000000000,
+      "priorityClassName": "system-cluster-critical",
+      "restartPolicy": "Always",
+      "schedulerName": "default-scheduler",
+      "securityContext": {},
+      "serviceAccount": "calico-kube-controllers",
+      "serviceAccountName": "calico-kube-controllers",
+      "terminationGracePeriodSeconds": 30,
+      "tolerations": [
+        {
+          "key": "CriticalAddonsOnly",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoSchedule",
+          "key": "node-role.kubernetes.io/master"
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        }
+      ],
+      "volumes": [
+        {
+          "name": "calico-kube-controllers-token-xsptk",
+          "secret": {
+            "defaultMode": 420,
+            "secretName": "calico-kube-controllers-token-xsptk"
+          }
+        }
+      ]
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-12-19T23:23:10.000Z",
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-12-27T02:36:43.000Z",
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-12-27T02:36:43.000Z",
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2019-12-19T23:23:10.000Z",
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "containerID": "cri-o://c07f02516fde8865bccaaf2c21315213bb30114c2293d8be4ff3eb187276f3c7",
+          "image": "quay.io/calico/kube-controllers:v3.10.2",
+          "imageID": "quay.io/calico/kube-controllers@sha256:7aad5beadcba7a983358bf33f13dabcf45007de9283dd244f1ecef20a2f87c6c",
+          "lastState": {
+            "terminated": {
+              "containerID": "cri-o://7f7047c0e096fa9edd26c9784340624406f496765c624f734bda02fa024cc2dd",
+              "exitCode": 255,
+              "finishedAt": "2019-12-26T17:54:15.000Z",
+              "reason": "Error",
+              "startedAt": "2019-12-21T20:44:15.000Z"
+            }
+          },
+          "name": "calico-kube-controllers",
+          "ready": true,
+          "restartCount": 2,
+          "state": {
+            "running": {
+              "startedAt": "2019-12-26T17:56:38.000Z"
+            }
+          }
+        }
+      ],
+      "hostIP": "192.168.122.41",
+      "phase": "Running",
+      "podIP": "192.168.204.200",
+      "qosClass": "BestEffort",
+      "startTime": "2019-12-19T23:23:10.000Z"
+    }
+  }
+
+  metadata.name
+  metadata.namespace
+  metadata.creationTimestamp
+  spec.containers.length
+  spec.dnsPolicy
+  spec.restartPolicy
+  spec.nodeName
+  status.hostIP
+  status.qosClass
+  status.phase
+  status.startTime
