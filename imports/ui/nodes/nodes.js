@@ -4,6 +4,7 @@ import { _ } from 'underscore';
 
 import './nodes.html';
 
+
 node_info = (_object) => {
     let MemoryPressure = '';
     let NetworkUnavailable = '';
@@ -84,9 +85,13 @@ nodes_info = (nodesObjects) => {
 }
 
 selectedNode = (_nodeName, _clusterArray) => {
-    console.log("Selected node = " + _nodeName + "  " + _clusterArray.length + " elements");
+    if (_debug) {
+        console.log(arguments.callee.name + "() Selected node = " + _nodeName + "  " + _clusterArray.length + " elements");
+    }
     for(var i=0; i <= _clusterArray.length; i++) {
-        console.log(_clusterArray[i].metadata.name + " == " + _nodeName);
+        if(_debug) {
+            console.log(_clusterArray[i].metadata.name + " == " + _nodeName);
+        }
         if (_clusterArray[i].metadata.name == _nodeName) {
             return _clusterArray[i];
         }
@@ -94,21 +99,25 @@ selectedNode = (_nodeName, _clusterArray) => {
     return undefined;
 }
 
-getClusterNodes = (refreshInterval=5000, _debug) => {
-    console.log("Ask for cluster list, trigger autoreload data.");
+getClusterNodes = (refreshInterval=5000) => {
+    if (_debug) {
+        console.log(arguments.callee.name + "() Ask for cluster list, trigger autoreload data.");
+    }
     askFor('getNodes', 'cluster', '/cluster');
     updateCluster = Meteor.setInterval(() => {
         askFor('getNodes', 'cluster', '/cluster');
     }, refreshInterval);
 }
 
-Template.List_nodes.created = (refreshInterval=5000, _debug=true) => {
-    getClusterNodes(refreshInterval, _debug);
+Template.List_nodes.created = (refreshInterval=5000) => {
+    getClusterNodes(refreshInterval);
 }
 
 Template.List_nodes.helpers({
-    get_listNodes(_debug=true) {
-        console.log("Ask for cluster list");
+    get_listNodes() {
+        if (_debug) {
+            console.log(arguments.callee.name + "() Ask for cluster list");
+        }
         return nodes_info(_data.get('cluster'));    
     },
     /**
@@ -117,13 +126,15 @@ Template.List_nodes.helpers({
 });
 
 Template.List_nodes.destroyed = function() {
-    console.log("cluster remove autoreload data.");
+    if(_debug) {
+        console.log("cluster remove autoreload data.");
+    }
     Meteor.clearInterval(updateCluster);
 };
 
 
-Template.Details_node.created = (refreshInterval=5000, _debug=true) => {
-    getClusterNodes(refreshInterval, _debug);
+Template.Details_node.created = (refreshInterval=5000) => {
+    getClusterNodes(refreshInterval);
 }
 
 
@@ -131,13 +142,18 @@ Template.Details_node.helpers({
     get_nodeDetails() {
         let _nodeName = FlowRouter.getParam("_nodeName");
         let nodeInfo = node_info(selectedNode(_nodeName, _data.get('cluster')));
-        console.dir(nodeInfo);
+        if(_debug) {
+            console.log(arguments.callee.name + '() : ');
+            console.dir(nodeInfo);
+        }
         return nodeInfo;
     },
 
 });
 
 Template.Details_node.destroyed = function() {
-    console.log("cluster remove autoreload data.");
+    if(_debug) {
+        console.log("cluster remove autoreload data.");
+    }
     Meteor.clearInterval(updateCluster);
 };

@@ -1,184 +1,264 @@
 {
-    "metadata": {
-      "annotations": {
-        "cni.projectcalico.org/podIP": "192.168.204.200/32",
-        "scheduler.alpha.kubernetes.io/critical-pod": ""
-      },
-      "creationTimestamp": "2019-12-19T23:22:51.000Z",
-      "generateName": "calico-kube-controllers-74c9747c46-",
-      "labels": {
-        "k8s-app": "calico-kube-controllers",
-        "pod-template-hash": "74c9747c46"
-      },
-      "name": "calico-kube-controllers-74c9747c46-w7psr",
-      "namespace": "kube-system",
-      "ownerReferences": [
-        {
-          "apiVersion": "apps/v1",
-          "blockOwnerDeletion": true,
-          "controller": true,
-          "kind": "ReplicaSet",
-          "name": "calico-kube-controllers-74c9747c46",
-          "uid": "78177e6e-7d9d-42fa-a4ca-8cc1fef227f3"
-        }
-      ],
-      "resourceVersion": "393643",
-      "selfLink": "/api/v1/namespaces/kube-system/pods/calico-kube-controllers-74c9747c46-w7psr",
-      "uid": "b6f3d45d-f965-4f1e-b59d-1c0a3c81fbc9"
+  "metadata": {
+    "annotations": {
+      "cni.projectcalico.org/podIP": "192.168.254.24/32"
     },
-    "spec": {
-      "containers": [
-        {
-          "env": [
-            {
-              "name": "ENABLED_CONTROLLERS",
-              "value": "node"
-            },
-            {
-              "name": "DATASTORE_TYPE",
-              "value": "kubernetes"
-            }
-          ],
-          "image": "calico/kube-controllers:v3.10.2",
-          "imagePullPolicy": "IfNotPresent",
-          "name": "calico-kube-controllers",
-          "readinessProbe": {
-            "exec": {
-              "command": [
-                "/usr/bin/check-status",
-                "-r"
-              ]
-            },
-            "failureThreshold": 3,
-            "periodSeconds": 10,
-            "successThreshold": 1,
-            "timeoutSeconds": 1
-          },
-          "resources": {},
-          "terminationMessagePath": "/dev/termination-log",
-          "terminationMessagePolicy": "File",
-          "volumeMounts": [
-            {
-              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-              "name": "calico-kube-controllers-token-xsptk",
-              "readOnly": true
-            }
-          ]
-        }
-      ],
-      "dnsPolicy": "ClusterFirst",
-      "enableServiceLinks": true,
-      "nodeName": "k8s-master01.cluster.local",
-      "nodeSelector": {
-        "beta.kubernetes.io/os": "linux"
-      },
-      "priority": 2000000000,
-      "priorityClassName": "system-cluster-critical",
-      "restartPolicy": "Always",
-      "schedulerName": "default-scheduler",
-      "securityContext": {},
-      "serviceAccount": "calico-kube-controllers",
-      "serviceAccountName": "calico-kube-controllers",
-      "terminationGracePeriodSeconds": 30,
-      "tolerations": [
-        {
-          "key": "CriticalAddonsOnly",
-          "operator": "Exists"
-        },
-        {
-          "effect": "NoSchedule",
-          "key": "node-role.kubernetes.io/master"
-        },
-        {
-          "effect": "NoExecute",
-          "key": "node.kubernetes.io/not-ready",
-          "operator": "Exists",
-          "tolerationSeconds": 300
-        },
-        {
-          "effect": "NoExecute",
-          "key": "node.kubernetes.io/unreachable",
-          "operator": "Exists",
-          "tolerationSeconds": 300
-        }
-      ],
-      "volumes": [
-        {
-          "name": "calico-kube-controllers-token-xsptk",
-          "secret": {
-            "defaultMode": 420,
-            "secretName": "calico-kube-controllers-token-xsptk"
-          }
-        }
-      ]
+    "creationTimestamp": "2019-12-26T18:04:57.000Z",
+    "generateName": "prometheus-alertmanager-6cd5664864-",
+    "labels": {
+      "app": "prometheus",
+      "chart": "prometheus-9.7.0",
+      "component": "alertmanager",
+      "heritage": "Helm",
+      "pod-template-hash": "6cd5664864",
+      "release": "prometheus"
     },
-    "status": {
-      "conditions": [
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-12-19T23:23:10.000Z",
-          "status": "True",
-          "type": "Initialized"
-        },
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-12-27T02:36:43.000Z",
-          "status": "True",
-          "type": "Ready"
-        },
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-12-27T02:36:43.000Z",
-          "status": "True",
-          "type": "ContainersReady"
-        },
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-12-19T23:23:10.000Z",
-          "status": "True",
-          "type": "PodScheduled"
-        }
-      ],
-      "containerStatuses": [
-        {
-          "containerID": "cri-o://c07f02516fde8865bccaaf2c21315213bb30114c2293d8be4ff3eb187276f3c7",
-          "image": "quay.io/calico/kube-controllers:v3.10.2",
-          "imageID": "quay.io/calico/kube-controllers@sha256:7aad5beadcba7a983358bf33f13dabcf45007de9283dd244f1ecef20a2f87c6c",
-          "lastState": {
-            "terminated": {
-              "containerID": "cri-o://7f7047c0e096fa9edd26c9784340624406f496765c624f734bda02fa024cc2dd",
-              "exitCode": 255,
-              "finishedAt": "2019-12-26T17:54:15.000Z",
-              "reason": "Error",
-              "startedAt": "2019-12-21T20:44:15.000Z"
-            }
-          },
-          "name": "calico-kube-controllers",
-          "ready": true,
-          "restartCount": 2,
-          "state": {
-            "running": {
-              "startedAt": "2019-12-26T17:56:38.000Z"
+    "name": "prometheus-alertmanager-6cd5664864-24skn",
+    "namespace": "default",
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "ReplicaSet",
+        "name": "prometheus-alertmanager-6cd5664864",
+        "uid": "ed485b0f-b586-4c3f-82e4-f69b81627c32"
+      }
+    ],
+    "resourceVersion": "400164",
+    "selfLink": "/api/v1/namespaces/default/pods/prometheus-alertmanager-6cd5664864-24skn",
+    "uid": "ed45ebe1-bcbf-4f48-a8ef-b661261ef409"
+  },
+  "spec": {
+    "containers": [
+      {
+        "args": [
+          "--config.file=/etc/config/alertmanager.yml",
+          "--storage.path=/data",
+          "--cluster.advertise-address=$(POD_IP):6783",
+          "--web.external-url=/"
+        ],
+        "env": [
+          {
+            "name": "POD_IP",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "status.podIP"
+              }
             }
           }
+        ],
+        "image": "prom/alertmanager:v0.18.0",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "prometheus-alertmanager",
+        "ports": [
+          {
+            "containerPort": 9093,
+            "protocol": "TCP"
+          }
+        ],
+        "readinessProbe": {
+          "failureThreshold": 3,
+          "httpGet": {
+            "path": "/#/status",
+            "port": 9093,
+            "scheme": "HTTP"
+          },
+          "initialDelaySeconds": 30,
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "timeoutSeconds": 30
+        },
+        "resources": {},
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/etc/config",
+            "name": "config-volume"
+          },
+          {
+            "mountPath": "/data",
+            "name": "storage-volume"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "prometheus-alertmanager-token-ghprb",
+            "readOnly": true
+          }
+        ]
+      },
+      {
+        "args": [
+          "--volume-dir=/etc/config",
+          "--webhook-url=http://127.0.0.1:9093/-/reload"
+        ],
+        "image": "jimmidyson/configmap-reload:v0.2.2",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "prometheus-alertmanager-configmap-reload",
+        "resources": {},
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/etc/config",
+            "name": "config-volume",
+            "readOnly": true
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "prometheus-alertmanager-token-ghprb",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "k8s-worker01.cluster.local",
+    "priority": 0,
+    "restartPolicy": "Always",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "fsGroup": 65534,
+      "runAsGroup": 65534,
+      "runAsNonRoot": true,
+      "runAsUser": 65534
+    },
+    "serviceAccount": "prometheus-alertmanager",
+    "serviceAccountName": "prometheus-alertmanager",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "configMap": {
+          "defaultMode": 420,
+          "name": "prometheus-alertmanager"
+        },
+        "name": "config-volume"
+      },
+      {
+        "emptyDir": {},
+        "name": "storage-volume"
+      },
+      {
+        "name": "prometheus-alertmanager-token-ghprb",
+        "secret": {
+          "defaultMode": 420,
+          "secretName": "prometheus-alertmanager-token-ghprb"
         }
-      ],
-      "hostIP": "192.168.122.41",
-      "phase": "Running",
-      "podIP": "192.168.204.200",
-      "qosClass": "BestEffort",
-      "startTime": "2019-12-19T23:23:10.000Z"
-    }
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-26T18:04:57.000Z",
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-26T18:06:39.000Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-26T18:06:39.000Z",
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-26T18:04:57.000Z",
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "containerID": "cri-o://209f027841a17f4cf524d04ba622c7d1aea79187e7fe76cde3d1bb26bf32e8f7",
+        "image": "docker.io/prom/alertmanager:v0.18.0",
+        "imageID": "docker.io/prom/alertmanager@sha256:3c0f0ea52a662342282fc7236ce058ab47a6259ed146cfc6bbdb122ba244c160",
+        "lastState": {},
+        "name": "prometheus-alertmanager",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2019-12-26T18:06:09.000Z"
+          }
+        }
+      },
+      {
+        "containerID": "cri-o://90b453923bdccf9dbd37a6aa9d5ac5522f894e85372557bd2734e22952e3617c",
+        "image": "docker.io/jimmidyson/configmap-reload:v0.2.2",
+        "imageID": "docker.io/jimmidyson/configmap-reload@sha256:befec9f23d2a9da86a298d448cc9140f56a457362a7d9eecddba192db1ab489e",
+        "lastState": {},
+        "name": "prometheus-alertmanager-configmap-reload",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2019-12-26T18:06:10.000Z"
+          }
+        }
+      }
+    ],
+    "hostIP": "192.168.122.51",
+    "phase": "Running",
+    "podIP": "192.168.254.24",
+    "qosClass": "BestEffort",
+    "startTime": "2019-12-26T18:04:57.000Z"
   }
+}
 
-  metadata.name
-  metadata.namespace
-  metadata.creationTimestamp
-  spec.containers.length
-  spec.dnsPolicy
-  spec.restartPolicy
-  spec.nodeName
-  status.hostIP
-  status.qosClass
-  status.phase
-  status.startTime
+
+
+
+metadata.creationTimestamp
+metadata.generateName
+metadata.name
+metadata.namespace
+metadata.resourceVersion
+metadata.uid
+metadata.annotations {}
+metadata.labels {}
+
+spec.containers [{}]
+spec.dnsPolicy
+spec.enableServiceLinks
+spec.nodeName
+spec.priority
+spec.restartPolicy
+spec.schedulerName
+spec.securityContext
+spec.serviceAccount
+spec.serviceAccountName
+spec.terminationGracePeriodSeconds
+spec.tolerations [{}]
+spec.volumes [{}]
+
+status.conditions [{}]
+status.containerStatuses [{}]
+status.hostIP
+status.podIP
+status.qosClass
+status.startTime
+

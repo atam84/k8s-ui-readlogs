@@ -13,11 +13,11 @@
        <tbody>
        {{#each item in get_listNameSpaces}}
          <tr>
-           <td><a href="/pods/{{item.metadata.name}}">Get pods</a></td>
+           <td><a type="button" class="btn btn-info btn-sm" href='/pods/{{item.metadata.name}}'>Pods</a></td>
            <td>{{item.metadata.name}}</td>
            <td>{{item.metadata.uid}}</td>
-           <td>{{item.metadata.creationTimestamp}}</td>
-           <td><span class="badge badge-success">{{item.status.phase}}</span></td>
+           <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+           <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
          </tr>
        {{/each}}
        </tbody>

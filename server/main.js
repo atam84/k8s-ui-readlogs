@@ -26,7 +26,7 @@ Meteor.methods({
     },
     'getNamespacedPods': (_objParms) => {
       console.log('*** Serving pods in ' + _objParms.namespace + ' namespaces');
-      return k8sApi.listNamespacedPod( _objParms.namespace).then((res) => {
+      return k8sApi.listNamespacedPod(_objParms.namespace).then((res) => {
         return res.body;
       });
     },
@@ -42,5 +42,11 @@ Meteor.methods({
         return { 'items': res.body } ;
       });
     },
+    'getNamespacePod': (_objParms) => {
+      console.log('*** Serving information about ' + _objParms.podName  + ' in ' + _objParms.namespace + ' namespaces');
+      return k8sApi.readNamespacedPod(_objParms.podName, _objParms.namespace).then((res) => {
+        return { 'items': res.body };
+      });
+    }
 
 });

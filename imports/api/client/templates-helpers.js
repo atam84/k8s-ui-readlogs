@@ -8,7 +8,9 @@ Template.registerHelper("objectToPairs",function(object){
         return { "value": value };
     }*/
     return _.map(object, function(value, key) {
-        console.log(key + " --- " + value);
+        if(_debug) {
+            console.log(' ** key: ' + key + "  value: " + value);
+        }
         return {
             "key": key,
             "value": value
@@ -32,14 +34,21 @@ Template.registerHelper("arrayCount", function(_arrayCount){
     return _arrayCount.length;
 });
 
+Template.registerHelper("hasOneContainer", function(_arrayCount){
+    if(_arrayCount.length > 1) {
+        return false;
+    }
+    return true;
+});
+
 Template.registerHelper("selectClass",function(_value){
     let _classes = 'bg-success text-white';
     if (_value.toLowerCase() == "true") {
         _classes = 'bg-success text-white';
     } else if (_value.toLowerCase() == "false") {
-        _classes = 'bg-danger text-white';
-    } else {
         _classes = 'bg-warning text-white';
+    } else {
+        _classes = 'bg-danger text-white';
     }
     return _classes; 
 });
@@ -47,11 +56,37 @@ Template.registerHelper("selectClass",function(_value){
 Template.registerHelper("reverseSelectClass",function(_value){
     let _classes = 'bg-success text-white';
     if (_value.toLowerCase() == "true") {
-        _classes = 'bg-danger text-white';
+        _classes = 'bg-warning text-white';
     } else if (_value.toLowerCase() == "false") {
         _classes = 'bg-success text-white';
     } else {
-        _classes = 'bg-warning text-white';
+        _classes = 'bg-danger text-white';
     }
     return _classes; 
 });
+
+
+Template.registerHelper("statusClass",function(_value){
+    let _val = _value.toLowerCase();
+    switch (_val) {
+        case "pending":
+            return "badge-secondary";
+        case "running":
+        case "true":
+        case true:
+        case "active":
+            return "badge-success";
+        case "succeeded":
+            return "badge-info";
+        case "failed":
+        case "unknown":
+            return "badge-danger";
+        case "false":
+        case false:
+        case "terminating":
+            return "badge-warning";
+        default:
+            return "badge-warning";
+    }
+});
+

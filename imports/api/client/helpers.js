@@ -2,12 +2,18 @@ import { _ } from 'underscore'
 import { isUndefined } from 'util';
 
 askFor = (action, key='trash', path="/", _objParams=undefined) => {
-    console.log("Ask for " + action + " => " + path);
+    if (_debug) {
+        console.log(arguments.callee.name + "   Params: " + arguments);
+    }
     if (isUndefined(_objParams)) {
         Meteor.call(action, (err, res) => {
             if (err) {
                 console.log("ERROR : " + err);
             } else {
+                if (_debug) {
+                    console.log('Response :');
+                    console.dir(res);
+                }
                 _data.set(key, res.items);
             }
         });
@@ -16,8 +22,10 @@ askFor = (action, key='trash', path="/", _objParams=undefined) => {
             if (err) {
                 console.log("ERROR : " + err);
             } else {
-                console.log(' Meteor.call : ');
-                console.dir(res);
+                if (_debug) {
+                    console.log('Response :');
+                    console.dir(res);
+                }
                 _data.set(key, res.items);
             }
         });
@@ -25,9 +33,9 @@ askFor = (action, key='trash', path="/", _objParams=undefined) => {
     return _data.get(key);
 }
 
-goTo = (path='/', _debug=false) => {
-    if(_debug) {
-        console.log(' ** goTo() => ' + path);
+goTo = (path) => {
+    if (_debug) {
+        console.log(arguments.callee.name + "   Params: " + arguments);
     }
     FlowRouter.go(path);
     return true;
@@ -42,12 +50,13 @@ BytesToMib = (_str_value) => {
 }
 
 dateAndTime = (_str_date) => {
+    if(_str_date === null || _str_date === undefined) return "--"
     let date = new Date(_str_date);
     let mounth = ("0" + (date.getMonth() + 1)).slice(-2);
     let day = ("0" + date.getDate()).slice(-2);
-    let hour = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
+    let hour = ("0" + date.getHours()).slice(-2);
+    let minutes = ("0" + date.getMinutes()).slice(-2);
+    let seconds = ("0" + date.getSeconds()).slice(-2);
     return [date.getFullYear(), mounth, day].join("-") + " " + [hour, minutes, seconds].join(":");
 }
 
