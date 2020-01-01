@@ -1,25 +1,33 @@
 <template name='List_namespaces'>
-    <h5><strong>Namespaces</strong></h5>
-    <table class="table table-striped table-sm">
-      <thead>
-         <tr>
-            <th>#</th>
-            <th>Namespace</th>
-            <th>uid</th>
-            <th>creation</th>
-            <th>status</th>
-         </tr>
-       </thead>
-       <tbody>
-       {{#each item in get_listNameSpaces}}
-         <tr>
-           <td><a type="button" class="btn btn-info btn-sm" href='/pods/{{item.metadata.name}}'>Pods</a></td>
-           <td>{{item.metadata.name}}</td>
-           <td>{{item.metadata.uid}}</td>
-           <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
-           <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
-         </tr>
-       {{/each}}
-       </tbody>
-    </table>
+    <div class="row" style="height: 750px;" >
+        <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Namespaces</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                  <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                    <thead>
+                       <tr>
+                          <th>#</th>
+                          <th>Namespace</th>
+                          <th>uid</th>
+                          <th>creation</th>
+                          <th>status</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                     {{#each item in get_listNameSpaces}}
+                       <tr>
+                         <td><a type="button" class="btn btn-info btn-sm" href='/pods/{{item.metadata.name}}'>Pods</a></td>
+                         <td>{{item.metadata.name}}</td>
+                         <td>{{item.metadata.uid}}</td>
+                         <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                         <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
+                       </tr>
+                     {{/each}}
+                     </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

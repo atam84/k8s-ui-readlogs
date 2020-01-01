@@ -37,8 +37,8 @@ Meteor.methods({
       });
     },
     'getPodLogs': (_objParms) => {
-      console.log('*** Serving logs for ' + _objParms.podName + ' in ' + _objParms.namespace + ' namespaces');
-      return k8sApi.readNamespacedPodLog(_objParms.podName, _objParms.namespace).then((res) => {
+      console.log('*** Serving logs for ' + _objParms.podName + ' in ' + _objParms.namespace + ' namespaces (' + _objParms.container + ')');
+      return k8sApi.readNamespacedPodLog(_objParms.podName, _objParms.namespace, _objParms.container).then((res) => {
         return { 'items': res.body } ;
       });
     },

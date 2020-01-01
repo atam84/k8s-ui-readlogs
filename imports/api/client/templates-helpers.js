@@ -1,4 +1,5 @@
 import { _ } from 'underscore'
+import { isObject } from 'util';
 
 Template.registerHelper("objectToPairs",function(object){
     if (_.isArray(object)) {
@@ -39,6 +40,20 @@ Template.registerHelper("hasOneContainer", function(_arrayCount){
         return false;
     }
     return true;
+});
+
+Template.registerHelper("jsonPrint", function(jsonObject) {
+    if (typeof jsonObject === 'object') {
+        return JSON.stringify(jsonObject, undefined, 4);
+    }
+    return jsonObject;
+});
+
+Template.registerHelper("plusOne", function(_index) {
+    if (typeof _index === 'number') {
+        return _index + 1;
+    }
+    return _index;
 });
 
 Template.registerHelper("selectClass",function(_value){

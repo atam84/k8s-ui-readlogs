@@ -36,14 +36,50 @@ Template.List_allPods.helpers({
 
 Template.pod_Logs.helpers({
     getPodLogs() {
-        let selected_namespace = FlowRouter.getParam('_namespace');
-        let selected_pod = FlowRouter.getParam('_podName');
-        let logs = askFor('getPodLogs', 'pod_logs', '/pods/' + selected_namespace + '/' + selected_pod, {'namespace': selected_namespace, 'podName': selected_pod});
+        let _args = {};
+        let _path = "";
+        let isContainer = FlowRouter.getParam('_container');
+        if(isContainer == 'logs' || isContainer == undefined) {
+            _args = {
+                'namespace': FlowRouter.getParam('_namespace'),
+                'podName': FlowRouter.getParam('_podName'),
+                'container': undefined
+            }
+            path = '/pods/' + _args.namespace + '/' + _args.podName + '/logs';
+        } else {
+            _args = {
+                'namespace': FlowRouter.getParam('_namespace'),
+                'podName': FlowRouter.getParam('_podName'),
+                'container': FlowRouter.getParam('_container')
+            }
+            path = '/pods/' + _args.namespace + '/' + _args.podName + '/' + _args.container + '/logs';
+        }
+        
+        let logs = askFor('getPodLogs', 'pod_logs', _path, _args);
         if (_debug) {
-            console.log(arguments.callee.name + "()  Ask for " + selected_pod + " in namespace : " + selected_namespace);
+            console.log(arguments.callee.name + "()  Ask for " + _args.podName + " in namespace : " + _args.namespace + " (" + _args.container + ")");
             console.log(logs);
         }
         return logs;
+    },
+    podLogsTitle() {
+        let _args = {};
+        let isContainer = FlowRouter.getParam('_container');
+        if(isContainer == 'logs' || isContainer == undefined) {
+            _args = {
+                'namespace': FlowRouter.getParam('_namespace'),
+                'podName': FlowRouter.getParam('_podName'),
+                'container': undefined
+            }
+            return Spacebars.SafeString('Log pod: <font color="gray">' + _args.podName + '</font>  namespace: <font color="gray">' + _args.namespace + '</font>');
+        } else {
+            _args = {
+                'namespace': FlowRouter.getParam('_namespace'),
+                'podName': FlowRouter.getParam('_podName'),
+                'container': FlowRouter.getParam('_container')
+            }
+            return Spacebars.SafeString('Log pod: <font color="gray">' + _args.podName + '</font> container : <font color="gray">' + _args.container + '</font>  namespace: <font color="gray">' + _args.namespace + '</font>');
+        }
     }
 });
 

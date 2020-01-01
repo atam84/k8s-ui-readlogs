@@ -38,5 +38,5 @@ COPY --from=0 /app/bundle /app
 WORKDIR /app
 EXPOSE 8080
 CMD []
-ENTRYPOINT [ "node", "./main.js" ]
+ENTRYPOINT [ "/usr/local/bin/node", "/app/main.js" ]
 #COPY --from=nginx:latest /etc/nginx/nginx.conf /nginx.conf

@@ -1,204 +1,273 @@
 <template name='List_namespacePods'>
-    <h4>Namespace: {{getNamespace}}</h4>
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>pod</th>
-                <th>Logs</th>
-                <th>NS</th>
-                <th>Pod IP</th>
-                <th>Creation</th>
-                <th>Containers</th>
-                <th>dnsPolicy</th>
-                <th>restartPolicy</th>
-                <th>Node</th>
-                <th>Host IP</th>
-                <th>QOS</th>
-                <th>start</th>
-                <th>status</th>
-            </tr>
-        </thead>
-        <tbody>
-        {{#each item in getNamespacePods}}
-            <tr>
-                <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
-                {{#if hasOneContainer item.spec.containers}}
-                <td><a type="button" class="btn btn-primary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}/logs'>Log</a></td>
-                {{else}}
-                <td><a type="button" class="btn btn-secondary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>Log</a></td>
-                {{/if}}
-                <td>{{item.metadata.namespace}}</td>
-                <td>{{item.status.podIP}}</td>
-                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
-                <td>{{arrayCount item.spec.containers}}</td>
-                <td>{{item.spec.dnsPolicy}}</td>
-                <td>{{item.spec.restartPolicy}}</td>
-                <td>{{item.spec.nodeName}}</td>
-                <td>{{item.status.hostIP}}</td>
-                <td>{{item.status.qosClass}}</td>
-                <td>{{dateAndTime item.status.startTime}}</td>
-                <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
-</template>
-
-<template name='List_allPods'>
-    <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>pod</th>
-                <th>Logs</th>
-                <th>NS</th>
-                <th>Pod IP</th>
-                <th>Creation</th>
-                <th>Containers</th>
-                <th>dnsPolicy</th>
-                <th>restartPolicy</th>
-                <th>Node</th>
-                <th>Host IP</th>
-                <th>QOS</th>
-                <th>start</th>
-                <th>status</th>
-            </tr>
-        </thead>
-        <tbody>
-        {{#each item in getAllPods}}
-            <tr>
-                <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
-                {{#if hasOneContainer item.spec.containers}}
-                <td><a type="button" class="btn btn-primary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}/logs'>Log</a></td>
-                {{else}}
-                <td><a type="button" class="btn btn-secondary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>Log</a></td>
-                {{/if}}
-                <td><a href='/pods/{{item.metadata.namespace}}'>{{item.metadata.namespace}}</a></td>
-                <td>{{item.status.podIP}}</td>
-                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
-                <td>{{arrayCount item.spec.containers}}</td>
-                <td>{{item.spec.dnsPolicy}}</td>
-                <td>{{item.spec.restartPolicy}}</td>
-                <td>{{item.spec.nodeName}}</td>
-                <td>{{item.status.hostIP}}</td>
-                <td>{{item.status.qosClass}}</td>
-                <td>{{dateAndTime item.status.startTime}}</td>
-                <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
-</template>
-
-<template name='pod_Logs'>
-    Pod logs
     <div class="row" style="height: 750px;" >
-        <div class="col-sm border rounded h-100 d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
-            <pre class="pre-scrollable" style="max-height: 100% !important;">{{getPodLogs}}</pre>
+        <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Namespace: {{getNamespace}}</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                                <th>pod</th>
+                                <th>Logs</th>
+                                <th>NS</th>
+                                <th>Pod IP</th>
+                                <th>Creation</th>
+                                <th>Containers</th>
+                                <th>dnsPolicy</th>
+                                <th>restartPolicy</th>
+                                <th>Node</th>
+                                <th>Host IP</th>
+                                <th>QOS</th>
+                                <th>start</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{#each item in getNamespacePods}}
+                            <tr>
+                                <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                                {{#if hasOneContainer item.spec.containers}}
+                                <td><a type="button" class="btn btn-primary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}/logs'>Log</a></td>
+                                {{else}}
+                                <td><a type="button" class="btn btn-secondary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>Log</a></td>
+                                {{/if}}
+                                <td>{{item.metadata.namespace}}</td>
+                                <td>{{item.status.podIP}}</td>
+                                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                                <td>{{arrayCount item.spec.containers}}</td>
+                                <td>{{item.spec.dnsPolicy}}</td>
+                                <td>{{item.spec.restartPolicy}}</td>
+                                <td>{{item.spec.nodeName}}</td>
+                                <td>{{item.status.hostIP}}</td>
+                                <td>{{item.status.qosClass}}</td>
+                                <td>{{dateAndTime item.status.startTime}}</td>
+                                <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </template>
+
+
+<template name='List_allPods'>
+    <div class="row" style="height: 750px;" >
+        <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Namespace: {{getNamespace}}</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr>
+                            <th>pod</th>
+                            <th>Logs</th>
+                            <th>NS</th>
+                            <th>Pod IP</th>
+                            <th>Creation</th>
+                            <th>Containers</th>
+                            <th>dnsPolicy</th>
+                            <th>restartPolicy</th>
+                            <th>Node</th>
+                            <th>Host IP</th>
+                            <th>QOS</th>
+                            <th>start</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{#each item in getAllPods}}
+                        <tr>
+                            <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                            {{#if hasOneContainer item.spec.containers}}
+                            <td><a type="button" class="btn btn-primary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}/logs'>Log</a></td>
+                            {{else}}
+                            <td><a type="button" class="btn btn-secondary btn-sm" href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>Log</a></td>
+                            {{/if}}
+                            <td><a href='/pods/{{item.metadata.namespace}}'>{{item.metadata.namespace}}</a></td>
+                            <td>{{item.status.podIP}}</td>
+                            <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                            <td>{{arrayCount item.spec.containers}}</td>
+                            <td>{{item.spec.dnsPolicy}}</td>
+                            <td>{{item.spec.restartPolicy}}</td>
+                            <td>{{item.spec.nodeName}}</td>
+                            <td>{{item.status.hostIP}}</td>
+                            <td>{{item.status.qosClass}}</td>
+                            <td>{{dateAndTime item.status.startTime}}</td>
+                            <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+</template>
+
+
+<template name='pod_Logs'>
+    <div class="row" style="height: 750px;" >
+        <div class="col-sm h-100 d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
+            <div class="card h-100 bg-light mb-3">
+                <div class="card-header"><h4>{{podLogsTitle}}</h4></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <pre class="pre-scrollable" style="max-height: 100% !important; min-height: 100% !important; padding: 0.5rem !important;">{{getPodLogs}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
 
 <template name='pod_Details'>
     {{#with podDetails}}
     <h4>{{metadata.name}}</h4>
     <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">Pod Conditions</h4>
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>lastTransitionTime</th>
-                  <th>lastProbeTime</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each item in status.conditions}}
-                <tr>
-                  <td>{{item.type}}</td>
-                  <td>{{item.status}}</td>
-                  <td>{{dateAndTime item.lastTransitionTime}}</td>
-                  <td>{{dateAndTime item.lastProbeTime}}</td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Pod Conditions</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th>Type</th>
+                              <th>Status</th>
+                              <th>lastTransitionTime</th>
+                              <th>lastProbeTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each item in status.conditions}}
+                            <tr>
+                              <td>{{item.type}}</td>
+                              <td>{{item.status}}</td>
+                              <td>{{dateAndTime item.lastTransitionTime}}</td>
+                              <td>{{dateAndTime item.lastProbeTime}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Pod Infos</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            <tr><td>Generate Name</td><td>{{metadata.generateName}}</td></tr>
+                            <tr><td>Name</td><td>{{metadata.name}}</td></tr>
+                            <tr><td>Namespace</td><td>{{metadata.namespace}}</td></tr>
+                            <tr><td>Resource Version</td><td>{{metadata.resourceVersion}}</td></tr>
+                            <tr><td>UID</td><td>{{metadata.uid}}</td></tr>
+                            <tr><td>Host IP</td><td>{{status.hostIP}}</td></tr>
+                            <tr><td>Pod IP</td><td>{{status.podIP}}</td></tr>
+                            <tr><td>QOS Class</td><td>{{status.qosClass}}</td></tr>
+                            <tr><td>Creation Times</td><td>{{dateAndTime metadata.creationTimestamp}}</td></tr>
+                            <tr><td>Sart Time</td><td>{{dateAndTime status.startTime}}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Specs</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            <tr><td>dnsPolicy</td><td>{{spec.dnsPolicy}}</td></tr>
+                            <tr><td>Service links</td><td>{{spec.enableServiceLinks}}</td></tr>
+                            <tr><td>Node</td><td>{{spec.nodeName}}</td></tr>
+                            <tr><td>Priority</td><td>{{spec.priority}}</td></tr>
+                            <tr><td>Restart Policy</td><td>{{spec.restartPolicy}}</td></tr>
+                            <tr><td>Scheduler Name</td><td>{{spec.schedulerName}}</td></tr>
+                            <tr><td>Security Context</td><td><pre>{{jsonPrint spec.securityContext}}</pre></td></tr>
+                            <tr><td>Service Account</td><td>{{spec.serviceAccount}}</td></tr>
+                            <tr><td>Service Account Name</td><td>{{spec.serviceAccountName}}</td></tr>
+                            <tr><td>Grace Period Seconds</td><td>{{spec.terminationGracePeriodSeconds}}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Lables</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs metadata.labels}}
+                            <tr><td>{{key}}</td><td>{{jsonPrint value}}</td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Annotations</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs metadata.annotations}}
+                            <tr><td>{{key}}</td><td>{{jsonPrint value}}</td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row">
         {{#each item in spec.containers}}
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">Containers</h4>
-            <table class="table table-sm">
-                <tbody>
-                    {{#each objectToPairs item}}
-                    <tr><td>{{key}}</td><td>{{value}}</td></tr>
-                    {{/each}}
-                </tbody>
-            </table>
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h5><strong>Container ({{plusOne @index}})</strong></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{item.name}}</h6>
+                        </div>
+                        <div class="col-md-2 float-right">
+                            <a class="btn btn-light btn-block" href="/pods/{{metadata.namespace}}/{{metadata.name}}/{{item.name}}/logs">Log</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs item}}
+                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         {{/each}}
     </div>
-    <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">System</h4>
-            <table class="table table-sm">
-                <tbody>
-                    <tr><td>Generate Name</td><td>{{metadata.generateName}}</td></tr>
-                    <tr><td>Name</td><td>{{metadata.name}}</td></tr>
-                    <tr><td>Namespace</td><td>{{metadata.namespace}}</td></tr>
-                    <tr><td>Resource Version</td><td>{{metadata.resourceVersion}}</td></tr>
-                    <tr><td>UID</td><td>{{metadata.uid}}</td></tr>
-                    <tr><td>Host IP</td><td>{{status.hostIP}}</td></tr>
-                    <tr><td>Pod IP</td><td>{{status.podIP}}</td></tr>
-                    <tr><td>QOS Class</td><td>{{status.qosClass}}</td></tr>
-                    <tr><td>Creation Times</td><td>{{dateAndTime metadata.creationTimestamp}}</td></tr>
-                    <tr><td>Sart Time</td><td>{{dateAndTime status.startTime}}</td></tr>
-                </tbody>
-            </table>
-        </div>
 
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">Spec</h4>
-            <table class="table table-sm">
-                <tbody>
-                    <tr><td>dnsPolicy</td><td>{{spec.dnsPolicy}}</td></tr>
-                    <tr><td>Service links</td><td>{{spec.enableServiceLinks}}</td></tr>
-                    <tr><td>Node</td><td>{{spec.nodeName}}</td></tr>
-                    <tr><td>Priority</td><td>{{spec.priority}}</td></tr>
-                    <tr><td>Restart Policy</td><td>{{spec.restartPolicy}}</td></tr>
-                    <tr><td>Scheduler Name</td><td>{{spec.schedulerName}}</td></tr>
-                    <tr><td>Security Context</td><td>{{spec.securityContext}}</td></tr>
-                    <tr><td>Service Account</td><td>{{spec.serviceAccount}}</td></tr>
-                    <tr><td>Service Account Name</td><td>{{spec.serviceAccountName}}</td></tr>
-                    <tr><td>Grace Period Seconds</td><td>{{spec.terminationGracePeriodSeconds}}</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">Lables</h4>
-            <table class="table table-sm">
-                <tbody>
-                  {{#each objectToPairs metadata.labels}}
-                  <tr><td>{{key}}</td><td>{{value}}</td></tr>
-                  {{/each}}
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h4 style="margin: 0.8rem;">Annotations</h4>
-            <table class="table table-sm">
-                <tbody>
-                  {{#each objectToPairs metadata.annotations}}
-                  <tr><td>{{key}}</td><td>{{value}}</td></tr>
-                  {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </div>
+
     {{/with}}
 </template>
 

@@ -1,156 +1,208 @@
 <template name='List_nodes'>
-    <h5><strong>Cluster</strong></h5>
-    <table class="table table-striped table-sm">
-      <thead>
-         <tr>
-            <th>#</th>
-            <th>Namespace</th>
-            <th>creation</th>
-            <th>cpu</th>
-            <th>ram</th>
-            <th>Max pods</th>
-            <th>arch</th>
-            <th>runtime</th>
-            <th>os</th>
-            <th>Kernel</th>
-            <th>status</th>
-         </tr>
-       </thead>
-       <tbody>
-       {{#each item in get_listNodes}}
-         <tr>
-           <td><a type="button" class="btn btn-info btn-sm" href='/node/{{item.serverName}}'>Details</a></td>
-           <td>{{item.serverName}}</td>
-           <td>{{item.createDate}} {{item.createTime}}</td>
-           <td>{{item.capacity.cpu}}</td>
-           <td>{{item.memory_gi}}</td>
-           <td>{{item.capacity.pods}}</td>
-           <td>{{item.architecture}}</td>
-           <td>{{item.containerRuntimeVersion}}</td>
-           <td>{{item.operatingSystem}}</td>
-           <td>{{item.kernelVersion}}</td>
-           <td><span class="badge {{statusClass item.ready}}">{{item.ready}}</span></td>
-         </tr>
-       {{/each}}
-       </tbody>
-    </table>
+  <div class="card bg-light mb-3">
+    <div class="card-header"><h5><strong>Cluster</strong></h5></div>
+    <div class="card-body" style="padding: 0rem !important;">
+      <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+        <thead>
+          <tr>
+              <th>#</th>
+              <th>Namespace</th>
+              <th>creation</th>
+              <th>cpu</th>
+              <th>ram</th>
+              <th>Max pods</th>
+              <th>arch</th>
+              <th>runtime</th>
+              <th>os</th>
+              <th>Kernel</th>
+              <th>status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each item in get_listNodes}}
+          <tr>
+            <td><a type="button" class="btn btn-info btn-sm" href='/node/{{item.serverName}}'>Details</a></td>
+            <td>{{item.serverName}}</td>
+            <td>{{item.createDate}} {{item.createTime}}</td>
+            <td>{{item.capacity.cpu}}</td>
+            <td>{{item.memory_gi}}</td>
+            <td>{{item.capacity.pods}}</td>
+            <td>{{item.architecture}}</td>
+            <td>{{item.containerRuntimeVersion}}</td>
+            <td>{{item.operatingSystem}}</td>
+            <td>{{item.kernelVersion}}</td>
+            <td><span class="badge {{statusClass item.ready}}">{{item.ready}}</span></td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <template name='Details_node'>
   {{#with get_nodeDetails}}
   <h5><strong>{{serverName}}</strong></h5>
   <div class="row">
-      <div class="p-3 col-sm border rounded {{selectClass ready}}" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-      Ready 
+    <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card text-white {{selectClass ready}} mb-3">
+        <div class="card-header">Ready</div>
       </div>
-      <div class="p-3 col-sm border rounded {{reverseSelectClass memorypressure}}" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-      Memory Pressure
+    </div>
+    <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card text-white {{reverseSelectClass memorypressure}} mb-3">
+        <div class="card-header">Memory Pressure</div>
       </div>
-      <div class="p-3 col-sm border rounded {{reverseSelectClass networkunavailable}}" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-      Network
+    </div>
+    <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card text-white {{reverseSelectClass networkunavailable}} mb-3">
+        <div class="card-header">Network</div>
       </div>
-      <div class="p-3 col-sm border rounded {{reverseSelectClass disckpressure}}" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-      Disk Pressure
+    </div>
+    <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card text-white {{reverseSelectClass disckpressure}} mb-3">
+        <div class="card-header">Disk Pressure</div>
       </div>
-      <div class="p-3 col-sm border rounded {{reverseSelectClass pidpressure}}" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-      PID Pressure
+    </div>
+    <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card text-white {{reverseSelectClass pidpressure}} mb-3">
+        <div class="card-header">PID Pressure</div>
       </div>
+    </div>
   </div>
   <!-- div class="container" -->
     <div class="row">
-      <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-        <h5 style="margin: 0.8rem;"><strong>System</strong></h5>
-        <table class="table table-sm">
+      <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><h5><strong>System</strong></h5></div>
+        <div class="card-body" style="padding: 0rem !important;">
+          <table class="table table-striped table-sm" style="margin-bottom: 0px;">
             <tbody>
-                <tr><td>Node name</td><td>{{serverName}}</td></tr>
-                <tr><td>Creation</td><td>{{createDate}} {{createTime}}</td></tr>
-                <tr><td>Architecture</td><td>{{architecture}}</td></tr>
-                <tr><td>Container Runtime</td><td>{{containerRuntimeVersion}}</td></tr>
-                <tr><td>Operating system</td><td>{{operatingSystem}}</td></tr>
-                <tr><td>Kernel version</td><td>{{kernelVersion}}</td></tr>
-                <tr><td>kubeProxyVersion</td><td>{{kubeProxyVersion}}</td></tr>
-                <tr><td>kubeletVersion</td><td>{{kubeletVersion}}</td></tr>
-                <tr><td>osImage</td><td>{{osImage}}</td></tr>
-                <tr><td>systemUUID</td><td>{{systemUUID}}</td></tr>
-                <tr><td>uid</td><td>{{uid}}</td></tr>
-                <tr><td>machineID</td><td>{{machineID}}</td></tr>
-                <tr><td>bootID</td><td>{{bootID}}</td></tr>
+              <tr><td>Node name</td><td>{{serverName}}</td></tr>
+              <tr><td>Creation</td><td>{{createDate}} {{createTime}}</td></tr>
+              <tr><td>Architecture</td><td>{{architecture}}</td></tr>
+              <tr><td>Container Runtime</td><td>{{containerRuntimeVersion}}</td></tr>
+              <tr><td>Operating system</td><td>{{operatingSystem}}</td></tr>
+              <tr><td>Kernel version</td><td>{{kernelVersion}}</td></tr>
+              <tr><td>kubeProxyVersion</td><td>{{kubeProxyVersion}}</td></tr>
+              <tr><td>kubeletVersion</td><td>{{kubeletVersion}}</td></tr>
+              <tr><td>osImage</td><td>{{osImage}}</td></tr>
+              <tr><td>systemUUID</td><td>{{systemUUID}}</td></tr>
+              <tr><td>uid</td><td>{{uid}}</td></tr>
+              <tr><td>machineID</td><td>{{machineID}}</td></tr>
+              <tr><td>bootID</td><td>{{bootID}}</td></tr>
             </tbody>
-        </table>
+          </table>
+        </div>
       </div>
-      <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-          <h5 style="margin: 0.8rem;"><strong>Capacity</strong></h5>
-          <table class="table table-sm">
-            <tbody>
+      </div>
+
+      <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><h5><strong>Capacity</strong></h5></div>
+        <div class="card-body" style="padding: 0rem !important;">
+          <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+              <tbody>
                 <tr><td>CPU</td><td>{{capacity.cpu}}</td></tr>
                 <tr><td>Ephemeral-storage</td><td>0</td></tr>
                 <tr><td>Hugepages-1Gi</td><td>0</td></tr>
                 <tr><td>Hugepages-2Mi</td><td>0</td></tr>
                 <tr><td>Pods Capacity</td><td>{{capacity.pods}}</td></tr>
                 <tr><td>Memory</td><td>{{kiToGiga capacity.memory}} Gi</td></tr>
-            </tbody>
+              </tbody>
           </table>
+        </div>
       </div>
-      <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-        <h5 style="margin: 0.8rem;"><strong>Allocatable capacity</strong></h5>
-        <table class="table table-sm">
-          <tbody>
-              <tr><td>CPU</td><td>{{allocatable.cpu}}</td></tr>
-              <tr><td>Ephemeral-storage</td><td>0</td></tr>
-              <tr><td>Hugepages-1Gi</td><td>0</td></tr>
-              <tr><td>Hugepages-2Mi</td><td>0</td></tr>
-              <tr><td>Pods Capacity</td><td>{{allocatable.pods}}</td></tr>
-              <tr><td>Memory</td><td>{{kiToGiga allocatable.memory}} Gi</td></tr>
-          </tbody>
-        </table>
-          <h5 style="margin: 0.8rem;"><strong>Addresses</strong></h5>
-          <table class="table table-sm">
-            <tbody>
-              {{#each item in addresses}}
-              <tr><td>{{item.type}}</td><td>{{item.address}}</td></tr>
-              {{/each}}
-            </tbody>
-          </table>
+      </div>
+
+      <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+          <div class="card bg-light mb-3">
+            <div class="card-header"><h5><strong>Allocatable capacity</strong></h5></div>
+            <div class="card-body" style="padding: 0rem !important;">
+              <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td>CPU</td><td>{{allocatable.cpu}}</td></tr>
+                    <tr><td>Ephemeral-storage</td><td>0</td></tr>
+                    <tr><td>Hugepages-1Gi</td><td>0</td></tr>
+                    <tr><td>Hugepages-2Mi</td><td>0</td></tr>
+                    <tr><td>Pods Capacity</td><td>{{allocatable.pods}}</td></tr>
+                    <tr><td>Memory</td><td>{{kiToGiga allocatable.memory}} Gi</td></tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card bg-light mb-3">
+            <div class="card-header"><h5><strong>Addresses</strong></h5></div>
+            <div class="card-body" style="padding: 0rem !important;">
+              <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                  <tbody>
+                    {{#each item in addresses}}
+                    <tr><td>{{item.type}}</td><td>{{item.address}}</td></tr>
+                    {{/each}}
+                  </tbody>
+              </table>
+            </div>
+          </div>
       </div>
     </div>
+
+
     <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h5 style="margin: 0.8rem;"><strong>Lables</strong></h5>
-            <table class="table table-sm">
-                <tbody>
-                  {{#each objectToPairs labels}}
-                  <tr><td>{{key}}</td><td>{{value}}</td></tr>
-                  {{/each}}
-                </tbody>
-            </table>
+        <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+          <div class="card bg-light mb-3">
+            <div class="card-header"><h5><strong>Lables</strong></h5></div>
+            <div class="card-body" style="padding: 0rem !important;">
+              <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                  <tbody>
+                    {{#each objectToPairs labels}}
+                    <tr><td>{{key}}</td><td>{{value}}</td></tr>
+                    {{/each}}
+                  </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h5 style="margin: 0.8rem;"><strong>Annotations</strong></h5>
-            <table class="table table-sm">
-                <tbody>
-                  {{#each objectToPairs annotations}}
-                  <tr><td>{{key}}</td><td>{{value}}</td></tr>
-                  {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h5 style="margin: 0.8rem;"><strong>Images</strong></h5>
-            <table class="table table-sm">
-                <tbody>
-                  {{#each item in images}}
-                  <tr><td>{{item.names.[0]}}</td><td>{{item.names.[1]}}</td><td>{{BytesToMib item.sizeBytes}} Mib</td></tr>
-                  {{/each}}
-                </tbody>
-            </table>
+        <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+          <div class="card bg-light mb-3">
+            <div class="card-header"><h5><strong>Annotations</strong></h5></div>
+            <div class="card-body" style="padding: 0rem !important;">
+              <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                    <tbody>
+                      {{#each objectToPairs annotations}}
+                      <tr><td>{{key}}</td><td>{{value}}</td></tr>
+                      {{/each}}
+                    </tbody>
+              </table>
+            </div>
+          </div>
         </div>
     </div>
+
+
     <div class="row">
-        <div class="col-sm border rounded" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
-            <h5 style="margin: 0.8rem;"><strong>Node Conditions</strong></h5>
-            <table class="table table-sm">
+      <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+        <div class="card bg-light mb-3">
+          <div class="card-header"><h5><strong>Images</strong></h5></div>
+          <div class="card-body" style="padding: 0rem !important;">
+            <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+              <tbody>
+                {{#each item in images}}
+                <tr><td>{{item.names.[0]}}</td><td>{{item.names.[1]}}</td><td>{{BytesToMib item.sizeBytes}} Mib</td></tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm" style="margin-right: 0.5rem; margin-bottom: 0.5rem;padding-right: 0px;padding-left: 0px;">
+        <div class="card bg-light mb-3">
+          <div class="card-header"><h5><strong>Images</strong></h5></div>
+          <div class="card-body" style="padding: 0rem !important;">
+            <table class="table table-striped table-sm" style="margin-bottom: 0px;">
               <thead>
                 <tr>
                   <th>Type</th>
@@ -174,7 +226,9 @@
                 {{/each}}
               </tbody>
             </table>
+          </div>
         </div>
+      </div>
     </div>
   <!-- /div -->
   {{/with}}
