@@ -19,6 +19,7 @@
                                 <th>Host IP</th>
                                 <th>QOS</th>
                                 <th>start</th>
+                                <th>restart</th>
                                 <th>status</th>
                             </tr>
                         </thead>
@@ -41,7 +42,10 @@
                                 <td>{{item.status.hostIP}}</td>
                                 <td>{{item.status.qosClass}}</td>
                                 <td>{{dateAndTime item.status.startTime}}</td>
-                                <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
+                                {{#with getContainerStatuses item.status.containerStatuses}}
+                                <td>{{higth_restart}}</td>
+                                <td><span class="badge {{badge}}">{{ready}}/{{countainers}} Ready</span></td>
+                                {{/with}}
                             </tr>
                         {{/each}}
                         </tbody>
@@ -74,6 +78,7 @@
                             <th>Host IP</th>
                             <th>QOS</th>
                             <th>start</th>
+                            <th>restart</th>
                             <th>status</th>
                         </tr>
                     </thead>
@@ -96,7 +101,10 @@
                             <td>{{item.status.hostIP}}</td>
                             <td>{{item.status.qosClass}}</td>
                             <td>{{dateAndTime item.status.startTime}}</td>
-                            <td><span class="badge {{statusClass item.status.phase}}">{{item.status.phase}}</span></td>
+                            {{#with getContainerStatuses item.status.containerStatuses}}
+                            <td>{{higth_restart}}</td>
+                            <td><span class="badge {{badge}}">{{ready}}/{{countainers}} Ready</span></td>
+                            {{/with}}
                         </tr>
                     {{/each}}
                     </tbody>
@@ -145,7 +153,7 @@
                             {{#each item in status.conditions}}
                             <tr>
                               <td>{{item.type}}</td>
-                              <td>{{item.status}}</td>
+                              <td><span class="badge {{TrueFalseClass item.status}}">{{item.status}}</span></td>
                               <td>{{dateAndTime item.lastTransitionTime}}</td>
                               <td>{{dateAndTime item.lastProbeTime}}</td>
                             </tr>
@@ -179,7 +187,9 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <!-- div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
                 <div class="card-header"><h5><strong>Specs</strong></h5></div>
@@ -196,6 +206,22 @@
                             <tr><td>Service Account</td><td>{{spec.serviceAccount}}</td></tr>
                             <tr><td>Service Account Name</td><td>{{spec.serviceAccountName}}</td></tr>
                             <tr><td>Grace Period Seconds</td><td>{{spec.terminationGracePeriodSeconds}}</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div -->
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Specs</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs spec}}
+                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            {{/each}}
                         </tbody>
                     </table>
                 </div>

@@ -1,4 +1,5 @@
 import { _ } from 'underscore'
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { isObject } from 'util';
 
 Template.registerHelper("objectToPairs",function(object){
@@ -105,3 +106,96 @@ Template.registerHelper("statusClass",function(_value){
     }
 });
 
+
+Template.registerHelper("TrueFalseClass",function(_value){
+    let _val = _value.toLowerCase();
+    switch (_val) {
+        case "true":
+        case true:
+            return "badge-success";
+        case "false":
+        case false:
+            return "badge-danger";
+        default:
+            return "badge-warning";
+    }
+});
+
+
+Template.registerHelper("getContainerStatuses",function(_containerStatuses){
+    let ready_count = 0;
+    let higth_restart = 0;
+    let total = _containerStatuses.length;
+    let badge = "badge-warning";
+    for (i=0; i<total; i++) {
+        if (_containerStatuses[i].ready) {
+            ready_count += 1;
+        }
+        if (_containerStatuses[i].restartCount > higth_restart) {
+            higth_restart = _containerStatuses[i].restartCount;
+        }
+    }
+    if (ready_count == total) {
+        badge = "badge-success";
+    } else if (ready_count == 0) {
+        badge = "badge-danger";
+    } else {
+        badge = "badge-warning";
+    }
+    let status = {
+        "countainers": total,
+        "higth_restart": higth_restart,
+        "ready": ready_count,
+        "failed": total - ready_count,
+        "badge": badge
+    }
+    return status;
+});
+
+
+
+
+/*
+{
+    "containerID": "cri-o://ad3bccd5914bb4465be5e07baf329a6af18a5fb8d6f02535029f04e55c1c97f3",
+    "image": "quay.io/coreos/kube-state-metrics:v1.6.0",
+    "imageID": "quay.io/coreos/kube-state-metrics@sha256:00ac168a1775e7a972019135dc25f1fc30bd8b30eb6a35b2d4e1621089f2eedf",
+    "lastState": {},
+    "name": "prometheus-kube-state-metrics",
+    "ready": true,
+    "restartCount": 0,
+    "state": {
+      "running": {
+        "startedAt": "2019-12-26T18:06:16.000Z"
+      }
+    }
+}
+
+
+[
+    {
+      "containerID": "cri-o://afa957896d0897c8a4dcf0d05d83c3f5f09c331357410e99e248776020853d16",
+      "image": "docker.io/kubernetesui/dashboard:v2.0.0-beta6",
+      "imageID": "docker.io/kubernetesui/dashboard@sha256:a3309c71ebb85a555371e427be52e02cbd20ae4684069357121335f5ee00e8bc",
+      "lastState": {
+        "terminated": {
+          "containerID": "cri-o://afa957896d0897c8a4dcf0d05d83c3f5f09c331357410e99e248776020853d16",
+          "exitCode": 2,
+          "finishedAt": "2020-01-02T03:22:59.000Z",
+          "reason": "Error",
+          "startedAt": "2020-01-02T03:22:29.000Z"
+        }
+      },
+      "name": "kubernetes-dashboard",
+      "ready": false,
+      "restartCount": 27,
+      "state": {
+        "waiting": {
+          "message": "back-off 5m0s restarting failed container=kubernetes-dashboard pod=kubernetes-dashboard-b65488c4-ztmx2_kubernetes-dashboard(4f0c698c-b47e-42b3-b4c3-1e18d12202cd)",
+          "reason": "CrashLoopBackOff"
+        }
+      }
+    }
+]
+
+*/
