@@ -14,10 +14,11 @@ import './main.html';
 import '../lib/routes';
 
 import '../imports/api/client/helpers';
-import '../imports/api/client/templates-helpers'
+import '../imports/api/client/templates-helpers';
 import '../imports/ui/namespaces/namespaces';
 import '../imports/ui/nodes/nodes';
 import '../imports/ui/pods/pods';
+import '../imports/ui/services/services';
 
 /**
  * MainMenu click event that forward to the rigth route using href

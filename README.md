@@ -15,7 +15,7 @@ The container must have network access to Kubernetes cluster
 
  - Integrate in Kubernetes cluster :
 
-Coming soon
+kubectl apply -f https://raw.githubusercontent.com/atam84/k8s-ui-readlogs/master/kubernetes/k8s-ui-readlogs-deployment.yaml
 
 
 PS: This tool does't use any database.

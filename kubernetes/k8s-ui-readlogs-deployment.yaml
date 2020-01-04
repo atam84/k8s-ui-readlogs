@@ -1,0 +1,237 @@
+---
+  apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: k8s-ui-readlogs
+  
+  ---
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+    namespace: k8s-ui-readlogs
+  
+  ---
+  kind: Service
+  apiVersion: v1
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+    namespace: k8s-ui-readlogs
+  spec:
+    ports:
+      - port: 8080
+        targetPort: 8080
+        nodePort: 30080
+    type: NodePort
+    selector:
+      k8s-app: k8s-ui-readlogs
+  
+  ---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs-certs
+    namespace: k8s-ui-readlogs
+  type: Opaque
+  
+  ---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs-csrf
+    namespace: k8s-ui-readlogs
+  type: Opaque
+  data:
+    csrf: ""
+  
+  ---
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs-key-holder
+    namespace: k8s-ui-readlogs
+  type: Opaque
+  
+  ---
+  kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs-settings
+    namespace: k8s-ui-readlogs
+  
+  ---
+  
+  
+  kind: Role
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+    namespace: k8s-ui-readlogs
+  rules:
+  - apiGroups:
+    - '*'
+    resources:
+    - '*'
+    verbs:
+    - '*'
+  #rules:
+    # - apiGroups: [""]
+    #   resources: ["services/proxy", "services", "secrets", "configmaps"]
+    #   resourceNames: [""]
+    #   verbs: ["get", "list", "watch"]
+    # Allow Dashboard to get, update and delete Dashboard exclusive secrets.
+    #- apiGroups: [""]
+    #  resources: ["secrets"]
+    #  resourceNames: ["k8s-ui-readlogs-key-holder", "k8s-ui-readlogs-certs", "k8s-ui-readlogs-csrf"]
+    #  verbs: ["get", "update", "delete"]
+    #  # Allow Dashboard to get and update 'k8s-ui-readlogs-settings' config map.
+    #- apiGroups: [""]
+    #  resources: ["configmaps"]
+    #  resourceNames: ["k8s-ui-readlogs-settings"]
+    #  verbs: ["get", "update"]
+    #  # Allow Dashboard to get metrics.
+    #- apiGroups: [""]
+    #  resources: ["services"]
+    #  resourceNames: [""]
+    #  verbs: [""]
+    #  #resourceNames: ["heapster", "dashboard-metrics-scraper"]
+    #  #verbs: ["proxy"]
+    #- apiGroups: [""]
+    #  resources: ["services/proxy"]
+    #  resourceNames: [""]
+    #  verbs: [""]
+    #  #resourceNames: ["heapster", "http:heapster:", "https:heapster:", "dashboard-metrics-scraper", "http:dashboard-metrics-scraper"]
+    #  #verbs: ["get"]
+  
+  
+  ---
+  kind: ClusterRole
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+  rules:
+  - apiGroups:
+    - '*'
+    resources:
+    - '*'
+    verbs:
+    - '*'
+  - nonResourceURLs:
+    - '*'
+    verbs:
+    - '*'
+  #rules:
+    # Allow Metrics Scraper to get metrics from the Metrics server
+    #- apiGroups: ["metrics.k8s.io"]
+    #  resources: ["pods", "nodes", "services", "namespaces", "deployments", "jobs"]
+    #  verbs: ["get", "list", "watch"]
+    #- apiGroups: [""]
+    #  resources: ["pods", "nodes", "services/proxy", "services", "namespaces", "deployments", "jobs"]
+    #  verbs: ["get", "list", "watch"]
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+    namespace: k8s-ui-readlogs
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: k8s-ui-readlogs
+  subjects:
+    - kind: ServiceAccount
+      name: k8s-ui-readlogs
+      namespace: k8s-ui-readlogs
+  
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    name: k8s-ui-readlogs
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: k8s-ui-readlogs
+  subjects:
+    - kind: ServiceAccount
+      name: k8s-ui-readlogs
+      namespace: k8s-ui-readlogs
+  
+  ---
+  kind: Deployment
+  apiVersion: apps/v1
+  metadata:
+    labels:
+      k8s-app: k8s-ui-readlogs
+    name: k8s-ui-readlogs
+    namespace: k8s-ui-readlogs
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        k8s-app: k8s-ui-readlogs
+    template:
+      metadata:
+        labels:
+          k8s-app: k8s-ui-readlogs
+      spec:
+        containers:
+          - name: k8s-ui-readlogs
+            image: atamdocker/k8s-ui-readlogs:latest
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            volumeMounts:
+              #- name: k8s-ui-readlogs-certs
+              #  mountPath: /certs
+                # Create on-disk volume to store exec logs
+              - mountPath: /tmp
+                name: tmp-volume
+            livenessProbe:
+              httpGet:
+                scheme: HTTP
+                path: /
+                port: 8080
+              initialDelaySeconds: 30
+              timeoutSeconds: 30
+           securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              runAsUser: 1001
+              runAsGroup: 2001
+        volumes:
+          #- name: k8s-ui-readlogs-certs
+          #  secret:
+          #    secretName: k8s-ui-readlogs-certs
+          - name: tmp-volume
+            emptyDir: {}
+        serviceAccountName: k8s-ui-readlogs
+        dnsPolicy: ClusterFirstWithHostNet
+        hostNetwork: true
+        nodeSelector:
+          "beta.kubernetes.io/os": linux
+        # Comment the following tolerations if Dashboard must not be deployed on master
+        #tolerations:
+        #  - key: node-role.kubernetes.io/master
+        #    effect: NoSchedule
+  

@@ -133,8 +133,12 @@
 
 
 <template name='pod_Details'>
-    {{#with podDetails}}
-    <h4>{{metadata.name}}</h4>
+{{#with podDetails}}
+    <div class="row">
+        <div class="col-sm pb-3">
+        <h4>{{metadata.name}}</h4>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
@@ -165,11 +169,30 @@
         </div>
     </div>
 
+    {{#each item in status.containerStatuses}}
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Pod Infos</strong></h5></div>
+                <div class="card-header"><h5><strong>Container {{item.name}} statuses</strong></h5></div>
                 <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs item}}
+                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong><a data-toggle="collapse" href="#pod-infos-block" aria-expanded="true" aria-controls="pod-infos-block">Pod infos</a></strong></h5></div>
+                <div id="pod-infos-block" class="card-body collapse" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <tbody>
                             <tr><td>Generate Name</td><td>{{metadata.generateName}}</td></tr>
@@ -189,34 +212,11 @@
         </div>
     </div>
 
-    <!-- div class="row">
-        <div class="col-sm d-inline-block">
-            <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Specs</strong></h5></div>
-                <div class="card-body" style="padding: 0rem !important;">
-                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
-                        <tbody>
-                            <tr><td>dnsPolicy</td><td>{{spec.dnsPolicy}}</td></tr>
-                            <tr><td>Service links</td><td>{{spec.enableServiceLinks}}</td></tr>
-                            <tr><td>Node</td><td>{{spec.nodeName}}</td></tr>
-                            <tr><td>Priority</td><td>{{spec.priority}}</td></tr>
-                            <tr><td>Restart Policy</td><td>{{spec.restartPolicy}}</td></tr>
-                            <tr><td>Scheduler Name</td><td>{{spec.schedulerName}}</td></tr>
-                            <tr><td>Security Context</td><td><pre>{{jsonPrint spec.securityContext}}</pre></td></tr>
-                            <tr><td>Service Account</td><td>{{spec.serviceAccount}}</td></tr>
-                            <tr><td>Service Account Name</td><td>{{spec.serviceAccountName}}</td></tr>
-                            <tr><td>Grace Period Seconds</td><td>{{spec.terminationGracePeriodSeconds}}</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div -->
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Specs</strong></h5></div>
-                <div class="card-body" style="padding: 0rem !important;">
+                <div class="card-header"><h5><strong><a data-toggle="collapse" href="#spec-block" aria-expanded="true" aria-controls="spec-block">Spec</a></strong></h5></div>
+                <div id="spec-block" class="card-body collapse" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <tbody>
                             {{#each objectToPairs spec}}
@@ -232,8 +232,8 @@
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Lables</strong></h5></div>
-                <div class="card-body" style="padding: 0rem !important;">
+                <div class="card-header"><h5><strong><a data-toggle="collapse" href="#labels-block" aria-expanded="true" aria-controls="labels-block">Labels</a></strong></h5></div>
+                <div id="labels-block" class="card-body collapse" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <tbody>
                             {{#each objectToPairs metadata.labels}}
@@ -245,12 +245,12 @@
             </div>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Annotations</strong></h5></div>
-                <div class="card-body" style="padding: 0rem !important;">
+                <div class="card-header"><h5><strong><a data-toggle="collapse" href="#annotations-block" aria-expanded="true" aria-controls="annotations-block">Annotations</a></strong></h5></div>
+                <div id="annotations-block" class="card-body collapse" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <tbody>
                             {{#each objectToPairs metadata.annotations}}
@@ -264,14 +264,15 @@
     </div>
 
 
+
+    {{#each item in spec.containers}}
     <div class="row">
-        {{#each item in spec.containers}}
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-10">
-                            <h5><strong>Container ({{plusOne @index}})</strong></h5>
+                            <h5><strong><a data-toggle="collapse" href="#container-block-{{plusOne @index}}" aria-expanded="true" aria-controls="container-block-{{plusOne @index}}">Container ({{plusOne @index}})</a></strong></h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{item.name}}</h6>
                         </div>
                         <div class="col-md-2 float-right">
@@ -279,21 +280,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body" style="padding: 0rem !important;">
+                <div id="container-block-{{plusOne @index}}" class="card-body collapse" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <tbody>
                             {{#each objectToPairs item}}
-                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            <tr>
+                                <td>{{key}}</td>
+                                <td><pre>{{jsonPrint value}}</pre></td>
+                            </tr>
+                            <!-- tr><td>{{key}}</td><td>
+                                <div class="row">
+                                    <div id="{{item.name}}-{{@index}}" class="col-sm-11 collapse"><pre>{{jsonPrint value}}</pre></div>
+                                    <div class="col-sm float-left" style="padding-right: 0.5rem;">
+                                        <a data-toggle="collapse" href="#{{item.name}}-{{@index}}" aria-expanded="true" aria-controls="{{item.name}}-{{@index}}"><pre><strong>+</strong></pre></a>
+                                    </div>
+                                </div>
+                            </td></tr -->
                             {{/each}}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        {{/each}}
     </div>
+    {{/each}}
 
 
-    {{/with}}
+{{/with}}
 </template>
 

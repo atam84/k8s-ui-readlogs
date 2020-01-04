@@ -3,9 +3,6 @@ import { Template } from 'meteor/templating';
 import { _ } from 'underscore';
 
 import './pods.html';
-import { Z_DATA_ERROR } from 'zlib';
-
-
 
 Template.List_namespacePods.helpers({
     getNamespacePods() {

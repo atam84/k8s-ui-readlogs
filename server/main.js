@@ -24,6 +24,12 @@ Meteor.methods({
           return res.body;
         });
     },
+    'getAllServices': () => {
+      console.log('*** Serving all services');
+      return k8sApi.listServiceForAllNamespaces().then((res) => {
+        return res.body;
+      });
+  },
     'getNamespacedPods': (_objParms) => {
       console.log('*** Serving pods in ' + _objParms.namespace + ' namespaces');
       return k8sApi.listNamespacedPod(_objParms.namespace).then((res) => {
@@ -50,3 +56,5 @@ Meteor.methods({
     }
 
 });
+
+

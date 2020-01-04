@@ -1,0 +1,69 @@
+<template name='list_services'>
+    <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
+        <div class="card bg-light mb-3">
+            <div class="card-header"><h5><strong>Services</strong></h5></div>
+            <div class="card-body" style="padding: 0rem !important;">
+                <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>NS</th>
+                            <th>Creation</th>
+                            <th>clusterIP</th>
+                            <th>externalTrafficPolicy</th>
+                            <th>nodePort</th>
+                            <th>Port</th>
+                            <th>Protocol</th>
+                            <th>targetPort</th>
+                            <th>type</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {{#each item in getAllServices}}
+                        <tr>
+                            <td><a href='/service/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                            <td>{{item.metadata.namespace}}</td>
+                            <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                            <td>{{item.spec.clusterIP}}</td>
+                            {{#if item.spec.externalTrafficPolicy}}
+                            <td>{{item.spec.externalTrafficPolicy}}</td>
+                            {{else}}
+                            <td>-</td>
+                            {{/if}}
+                            {{#if item.spec.ports.[0].nodePort}}
+                            <td>{{item.spec.ports.[0].nodePort}}</td>
+                            {{else}}
+                            <td>-</td>
+                            {{/if}}
+
+                            {{#if item.spec.ports.[0].port}}
+                            <td>{{item.spec.ports.[0].port}}</td>
+                            {{else}}
+                            <td>-</td>
+                            {{/if}}
+
+                            {{#if item.spec.ports.[0].protocol}}
+                            <td>{{item.spec.ports.[0].protocol}}</td>
+                            {{else}}
+                            <td>-</td>
+                            {{/if}}
+
+                            {{#if item.spec.ports.[0].targetPort}}
+                            <td>{{item.spec.ports.[0].targetPort}}</td>
+                            {{else}}
+                            <td>-</td>
+                            {{/if}}
+                            <td>{{item.spec.type}}</td>
+                            {{#each objectToPairs item.status}}
+                            <td>{{key}}</td>
+                            {{/each}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
