@@ -35,6 +35,13 @@ Template.registerHelper("dateAndTime",function(_str_date){
     return dateAndTime(_str_date);
 });
 
+Template.registerHelper("numberOrZero",function(_num){
+    if (_num === null || _num === undefined) {
+        return 0;
+    }
+    return _num;
+});
+
 Template.registerHelper("arrayCount", function(_arrayCount){
     return _arrayCount.length;
 });

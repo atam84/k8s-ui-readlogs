@@ -1,5 +1,42 @@
 <template name="all_deployments">
-    <h4>getDeployments</h4>
-    {{getDeployments}}
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Deployments</strong></h5></div>
+                <div id="pod-infos-block" class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th>Deployment</th>
+                              <th>Namespace</th>
+                              <th>Creation</th>
+                              <th>Strategy</th>
+                              <th>Replicas</th>
+                              <th>availableReplicas</th>
+                              <th>updatedReplicas</th>
+                              <th>Containers</th>
+                              <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each item in getDeployments}}
+                            <tr>
+                                <td>{{item.metadata.name}}</td>
+                                <td>{{item.metadata.namespace}}</td>
+                                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                                <td>{{item.spec.strategy.type}}</td>
+                                <td>{{numberOrZero item.status.readyReplicas}} / {{item.spec.replicas}}</td>
+                                <td>{{numberOrZero item.status.availableReplicas}}</td>
+                                <td>{{numberOrZero item.status.updatedReplicas}}</td>
+                                <td>{{arrayCount item.spec.template.spec.containers}}</td>
+                                <td><span class="badge {{TrueFalseClass item.status.conditions.[1].status}}">{{item.status.conditions.[1].type}}</span></td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
