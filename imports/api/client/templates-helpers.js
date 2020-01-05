@@ -29,6 +29,9 @@ Template.registerHelper("BytesToMib",function(_str_value){
 });
 
 Template.registerHelper("dateAndTime",function(_str_date){
+    if (_str_date === null) {
+        return '-';
+    }
     return dateAndTime(_str_date);
 });
 
@@ -48,6 +51,14 @@ Template.registerHelper("jsonPrint", function(jsonObject) {
         return JSON.stringify(jsonObject, undefined, 4);
     }
     return jsonObject;
+});
+
+Template.registerHelper("getAppVersion", function() {
+    return _version;
+});
+
+Template.registerHelper("getAppName", function() {
+    return _app_name;
 });
 
 Template.registerHelper("plusOne", function(_index) {
@@ -91,15 +102,19 @@ Template.registerHelper("statusClass",function(_value){
         case "true":
         case true:
         case "active":
+        case "normal":
             return "badge-success";
         case "succeeded":
             return "badge-info";
         case "failed":
         case "unknown":
+        case "error":
+        case "fatal":
             return "badge-danger";
         case "false":
         case false:
         case "terminating":
+        case "warning":
             return "badge-warning";
         default:
             return "badge-warning";
@@ -153,8 +168,6 @@ Template.registerHelper("getContainerStatuses",function(_containerStatuses){
 });
 
 
-
-
 /*
 {
     "containerID": "cri-o://ad3bccd5914bb4465be5e07baf329a6af18a5fb8d6f02535029f04e55c1c97f3",
@@ -199,3 +212,5 @@ Template.registerHelper("getContainerStatuses",function(_containerStatuses){
 ]
 
 */
+
+

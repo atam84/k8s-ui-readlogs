@@ -22,7 +22,7 @@
                     <tbody>
                     {{#each item in getAllServices}}
                         <tr>
-                            <td><a href='/service/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
+                            <td><a href='/service/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
                             <td>{{item.metadata.namespace}}</td>
                             <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
                             <td>{{item.spec.clusterIP}}</td>
@@ -67,3 +67,135 @@
     </div>
 </template>
 
+
+
+<template name="get_service">
+    {{#with getService}}
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Service informations</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th></th>
+                              <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Name</strong></td><td>{{metadata.name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Namespace</strong></td><td>{{metadata.namespace}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Creation</strong></td><td>{{dateAndTime metadata.creationTimestamp}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>resourceVersion</strong></td><td>{{metadata.resourceVersion}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>uid</strong></td><td>{{metadata.uid}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>clusterIP</strong></td><td>{{spec.clusterIP}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>type</strong></td><td>{{spec.type}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>sessionAffinity</strong></td><td>{{spec.sessionAffinity}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>externalTrafficPolicy</strong></td><td>{{#if spec.externalTrafficPolicy}}{{spec.externalTrafficPolicy}}{{else}}-{{/if}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Status</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs status}}
+                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Ports</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th>nodePort</th>
+                              <th>Port</th>
+                              <th>Protocol</th>
+                              <th>targetPort</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each item in spec.ports}}
+                            <tr>
+                                {{#if item.nodePort}}
+                                <td>{{item.nodePort}}</td>
+                                {{else}}
+                                <td>-</td>
+                                {{/if}}
+                                {{#if item.port}}
+                                <td>{{item.port}}</td>
+                                {{else}}
+                                <td>-</td>
+                                {{/if}}
+                                {{#if item.protocol}}
+                                <td>{{item.protocol}}</td>
+                                {{else}}
+                                <td>-</td>
+                                {{/if}}
+                                {{#if item.targetPort}}
+                                <td>{{item.targetPort}}</td>
+                                {{else}}
+                                <td>-</td>
+                                {{/if}}
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Selector</strong></h5></div>
+                <div class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <tbody>
+                            {{#each objectToPairs spec.selector}}
+                            <tr><td>{{key}}</td><td><pre>{{jsonPrint value}}</pre></td></tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/with}}
+</template>

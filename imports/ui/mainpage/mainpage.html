@@ -1,0 +1,55 @@
+<template name="mainPage">
+    
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Component status</strong></h5></div>
+                <div id="pod-infos-block" class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th>Component</th>
+                              <th>Creation</th>
+                              <th>Type</th>
+                              <th>Status</th>
+                              <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each item in getComponentStatus}}
+                            <tr>
+                                <td rowspan="{{arrayCount conditions}}">{{item.metadata.name}}</td>
+                                <td rowspan="{{arrayCount conditions}}">{{dateAndTime metadata.creationTimestamp}}</td>
+                                <td>{{item.conditions.[0].type}}</td>
+                                <td><span class="badge {{TrueFalseClass item.conditions.[0].status}}">{{item.conditions.[0].status}}</span></td>
+                                <td>{{item.conditions.[0].message}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{> all_events}}
+<!--
+rowspan="{{arrayCount conditions}}"
+{
+    "conditions": [
+      {
+        "message": "ok",
+        "status": "True",
+        "type": "Healthy"
+      }
+    ],
+    "metadata": {
+      "creationTimestamp": null,
+      "name": "scheduler",
+      "selfLink": "/api/v1/componentstatuses/scheduler"
+    }
+}
+
+-->
+</template>
+

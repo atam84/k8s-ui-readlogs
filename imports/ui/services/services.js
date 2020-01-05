@@ -16,3 +16,24 @@ Template.list_services.helpers({
     },
 
 });
+
+
+Template.get_service.helpers({
+    getService() {
+        let _args = {};
+        let _path = "";
+        _args = {
+            'namespace': FlowRouter.getParam('_namespace'),
+            'serviceName': FlowRouter.getParam('_serviceName'),
+        }
+        path = '/service/' + _args.namespace + '/' + _args.serviceName;
+        
+        let logs = askFor('getService', 'service', _path, _args);
+        if (_debug) {
+            console.log(arguments.callee.name + "()  Ask for " + _args.serviceName + " in namespace : " + _args.namespace);
+            console.log(logs);
+        }
+        return logs;
+    },
+});
+

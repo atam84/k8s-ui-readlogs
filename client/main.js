@@ -9,6 +9,8 @@ import { _ } from 'underscore';
 _display = new ReactiveVar();
 _data = new ReactiveDict();
 _debug = true;
+_app_name = 'k8s-ui-readLogs';
+_version = 'beta v0.3.5';
 
 import './main.html';
 import '../lib/routes';
@@ -19,6 +21,9 @@ import '../imports/ui/namespaces/namespaces';
 import '../imports/ui/nodes/nodes';
 import '../imports/ui/pods/pods';
 import '../imports/ui/services/services';
+import '../imports/ui/mainpage/mainpage';
+import '../imports/ui/events/events';
+import '../imports/ui/deployments/deployments';
 
 /**
  * MainMenu click event that forward to the rigth route using href
