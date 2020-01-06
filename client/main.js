@@ -10,7 +10,7 @@ _display = new ReactiveVar();
 _data = new ReactiveDict();
 _debug = true;
 _app_name = 'k8s-ui-readLogs';
-_version = 'beta v0.3.6';
+_version = 'beta v0.3.7';
 
 import './main.html';
 import '../lib/routes';
