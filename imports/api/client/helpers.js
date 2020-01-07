@@ -15,6 +15,7 @@ askFor = (action, key='trash', path="/", _objParams=undefined) => {
                     console.dir(res);
                 }
                 _data.set(key, res.items);
+                key.insert(res.items);
             }
         });
     } else {
@@ -27,6 +28,7 @@ askFor = (action, key='trash', path="/", _objParams=undefined) => {
                     console.dir(res);
                 }
                 _data.set(key, res.items);
+                key.insert(res.items);
             }
         });
     }
