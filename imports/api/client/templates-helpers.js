@@ -20,6 +20,10 @@ Template.registerHelper("objectToPairs",function(object){
     });
 });
 
+Template.registerHelper("loadDeployments", function(){
+    return loadFetchedData('deployments');
+});
+
 Template.registerHelper("kiToGiga",function(_str_value){
     return kiToGiga(_str_value);
 });

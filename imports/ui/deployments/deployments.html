@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each item in getDeployments}}
+                            {{#each item in loadDeployments}}
                             <tr>
                                 <td>{{item.metadata.name}}</td>
                                 <td>{{item.metadata.namespace}}</td>

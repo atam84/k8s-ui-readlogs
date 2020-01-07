@@ -10,6 +10,6 @@ Template.all_events.helpers({
         if (_debug) {
             console.log(arguments.callee.name + "() Ask for all events.");
         }
-        return askFor('getAllEvents', 'all_events', undefined);
+        return askFor('getAllEvents', 'events', undefined);
     }
 });

@@ -10,7 +10,7 @@ Template.List_namespacePods.helpers({
         if (_debug) {
             console.log(arguments.callee.name + "() Ask for pods in namespace : " + selected_namespace);
         }
-        return askFor('getNamespacedPods', 'namespace_pods', '/pods/' + selected_namespace, {'namespace': selected_namespace});
+        return askFor('getNamespacedPods', 'namespace_pods', undefined);
         //return nodes_info(_data.get('cluster'));
     },
     getNamespace() {
@@ -27,7 +27,7 @@ Template.List_allPods.helpers({
         if (_debug) {
             console.log(arguments.callee.name + "() Ask for all pods : ");
         }
-        return askFor('getAllPods', 'all_pods', '/pods');
+        return askFor('getAllPods', 'pods', undefined);
     }
 });
 
@@ -108,7 +108,7 @@ Template.pod_Details.helpers({
     podDetails() {
         let selected_namespace = FlowRouter.getParam('_namespace');
         let selected_pod = FlowRouter.getParam('_podName');
-        let podInfo = askFor('getNamespacePod', 'selected_pod', '/pods/' + selected_namespace + '/' + selected_pod, {'namespace': selected_namespace, 'podName': selected_pod});
+        let podInfo = askFor('getNamespacePod', 'selected_pod', undefined);
         if(_debug) {
             console.log(arguments.callee.name + "()");
             console.log(podInfo);

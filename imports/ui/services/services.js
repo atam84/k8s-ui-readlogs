@@ -11,7 +11,7 @@ Template.list_services.helpers({
         if (_debug) {
             console.log(arguments.callee.name + "() Ask for all services.");
         }
-        return askFor('getAllServices', 'services', '/services');
+        return askFor('getAllServices', 'services', undefined);
         //return nodes_info(_data.get('cluster'));
     },
 
@@ -26,14 +26,14 @@ Template.get_service.helpers({
             'namespace': FlowRouter.getParam('_namespace'),
             'serviceName': FlowRouter.getParam('_serviceName'),
         }
-        path = '/service/' + _args.namespace + '/' + _args.serviceName;
         
-        let logs = askFor('getService', 'service', _path, _args);
+        
+        let service = askFor('getService', '_trash', _args);
         if (_debug) {
             console.log(arguments.callee.name + "()  Ask for " + _args.serviceName + " in namespace : " + _args.namespace);
             console.log(logs);
         }
-        return logs;
+        return service;
     },
 });
 
