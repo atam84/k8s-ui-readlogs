@@ -17,7 +17,14 @@ transformObj = (obj, coder='encode') => {
       if (value === null) value = 'null';
       if (value === undefined) value = 'undefined';
       if (Object.prototype.toString.call(value) === '[object Date]') value = new Date(value).valueOf();
-      if (typeof value === 'object') {
+      if (Object.prototype.toString.call(value) === '[object Array]') {
+        let val = value;
+        value = [];
+        for (var i = 0; i < val.length; i++) {
+            value.push(transformObj(val[i], coder)); 
+        }
+      }
+      if (Object.prototype.toString.call(value) === '[object Object]') {
          value = transformObj(value, coder);
       }
       if (coder === 'encode') {
@@ -32,7 +39,7 @@ transformObj = (obj, coder='encode') => {
 
 askFor = (action, key='_trash', _objParams=undefined) => {
     if (_debug) {
-        console.log(arguments.callee.name + "   Params: ");
+        console.log(arguments.callee.name + " ***********   Params: ");
         console.dir(arguments);
     }
     //if (isUndefined(_objParams)) {
