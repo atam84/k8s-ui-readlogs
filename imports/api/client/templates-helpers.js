@@ -20,9 +20,20 @@ Template.registerHelper("objectToPairs",function(object){
     });
 });
 
+/***************************  Begin data loaders ***************************/
+
 Template.registerHelper("loadDeployments", function(){
     return loadFetchedData('deployments');
 });
+
+Template.registerHelper("loadEvents", function(){
+    return loadFetchedData('events');
+});
+
+Template.registerHelper("loadServices", function(){
+    return loadFetchedData('services');
+});
+/*************************** End of data loaders ***************************/
 
 Template.registerHelper("kiToGiga",function(_str_value){
     return kiToGiga(_str_value);

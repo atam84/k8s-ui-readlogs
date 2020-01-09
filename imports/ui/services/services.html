@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{#each item in getAllServices}}
+                    {{#each item in loadServices}}
                         <tr>
                             <td><a href='/service/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
                             <td>{{item.metadata.namespace}}</td>
