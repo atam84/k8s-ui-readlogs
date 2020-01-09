@@ -16,10 +16,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each item in getComponentStatus}}
+                            {{#each item in loadComponentStatus}}
                             <tr>
-                                <td rowspan="{{arrayCount conditions}}">{{item.metadata.name}}</td>
-                                <td rowspan="{{arrayCount conditions}}">{{dateAndTime metadata.creationTimestamp}}</td>
+                                <td rowspan="{{arrayCount item.conditions}}">{{item.metadata.name}}</td>
+                                <td rowspan="{{arrayCount item.conditions}}">{{dateAndTime metadata.creationTimestamp}}</td>
                                 <td>{{item.conditions.[0].type}}</td>
                                 <td><span class="badge {{TrueFalseClass item.conditions.[0].status}}">{{item.conditions.[0].status}}</span></td>
                                 <td>{{item.conditions.[0].message}}</td>

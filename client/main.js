@@ -35,6 +35,7 @@ Collections.deployments  = new Mongo.Collection(null);
 Collections.daemonsets   = new Mongo.Collection(null);
 Collections.replicasets  = new Mongo.Collection(null);
 Collections.statefulsets = new Mongo.Collection(null);
+Collections.components   = new Mongo.Collection(null);
 Collections._trash       = new Mongo.Collection(null);
 Collections._data        = new Mongo.Collection(null);
 
