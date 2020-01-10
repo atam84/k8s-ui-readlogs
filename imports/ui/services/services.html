@@ -20,49 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{#each item in loadServices}}
-                        <tr>
-                            <td rowspan="{{arrayCount item.spec.ports}}"><a href='/service/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{item.metadata.namespace}}</td>
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{dateAndTime item.metadata.creationTimestamp}}</td>
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{item.spec.clusterIP}}</td>
-                            {{#if item.spec.externalTrafficPolicy}}
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{item.spec.externalTrafficPolicy}}</td>
-                            {{else}}
-                            <td rowspan="{{arrayCount item.spec.ports}}">-</td>
-                            {{/if}}
-                        </tr>
-                        <tr>
-                            {{#if item.spec.ports.[0].nodePort}}
-                            <td>{{item.spec.ports.[0].nodePort}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-
-                            {{#if item.spec.ports.[0].port}}
-                            <td>{{item.spec.ports.[0].port}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-
-                            {{#if item.spec.ports.[0].protocol}}
-                            <td>{{item.spec.ports.[0].protocol}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-                            {{#if item.spec.ports.[0].targetPort}}
-                            <td>{{item.spec.ports.[0].targetPort}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-                       </tr>
-                       <tr>
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{item.spec.type}}</td>
-                            {{#each objectToPairs item.status}}
-                            <td rowspan="{{arrayCount item.spec.ports}}">{{key}}</td>
-                            {{/each}}
-                        </tr>
-                    {{/each}}
+                        {{generateTable}}
                     </tbody>
                 </table>
             </div>

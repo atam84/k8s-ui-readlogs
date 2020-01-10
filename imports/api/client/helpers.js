@@ -38,7 +38,7 @@ transformObj = (obj, coder='encode') => {
       }
       return xformed;
    }, {});
-   return obj;
+   //return obj;
 }
 
 logLoader = () => {
@@ -158,7 +158,7 @@ askFor = (action, key='_trash', _objParams=undefined) => {
         });
     } */
     //return _data.get(key);
-    return Collections[key].find({}).fetch();
+    //return Collections[key].find({}).fetch();
 }
 
 goTo = (path) => {
@@ -167,6 +167,10 @@ goTo = (path) => {
     }
     FlowRouter.go(path);
     return true;
+}
+
+loadServices = () => {
+    return loadFetchedData('services');
 }
 
 kiToGiga = (_str_value) => {
