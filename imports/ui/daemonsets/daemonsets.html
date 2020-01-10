@@ -1,0 +1,46 @@
+<template name="all_daemonsets">
+    <div class="row">
+        <div class="col-sm d-inline-block">
+            <div class="card bg-light mb-3">
+                <div class="card-header"><h5><strong>Daemonsets</strong></h5></div>
+                <div id="pod-infos-block" class="card-body" style="padding: 0rem !important;">
+                    <table class="table table-striped table-sm" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                              <th>Daemonset</th>
+                              <th>Namespace</th>
+                              <th>Creation</th>
+                              <th>Strategy</th>
+                              <th>Scheduled</th>
+                              <th>Available</th>
+                              <th>updated</th>
+                              <th>Ready</th>
+                              <th>Misscheduled</th>
+                              <th>Containers</th>
+                              <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each item in loadDaemonsets}}
+                            <tr>
+                                <td>{{item.metadata.name}}</td>
+                                <td>{{item.metadata.namespace}}</td>
+                                <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
+                                <td>{{item.spec.strategy.type}}</td>
+                                <td>{{numberOrZero item.status.currentNumberScheduled}}/{{item.status.desiredNumberScheduled}}</td>
+                                <td>{{numberOrZero item.status.numberAvailable}}</td>
+                                <td>{{numberOrZero item.status.updatedNumberScheduled}}</td>
+                                <td>{{numberOrZero item.status.numberReady}}</td>
+                                <td>{{numberOrZero item.status.numberMisscheduled}}</td>
+                                <td>{{arrayCount item.spec.template.spec.containers}}</td>
+                                <td>{{getConditions item.status}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+

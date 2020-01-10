@@ -42,6 +42,18 @@ Meteor.methods({
         return res.body;
       });
     },
+    'getDaemonsets': () => {
+      console.log('*** (DAEMONSETS) Serving all daemonsets');
+      return k8sApiApps.listDaemonSetForAllNamespaces().then((res) => {
+        return res.body;
+      });
+    },
+    'getStatefulsets': () => {
+      console.log('*** (STATEFULSETS) Serving all statefulsets');
+      return k8sApiApps.listStatefulSetForAllNamespaces().then((res) => {
+        return res.body;
+      });
+    },
     'getAllEvents': () => {
       console.log('*** (ALL EVENTS) Serving all events');
       return k8sApi.listEventForAllNamespaces().then((res) => {

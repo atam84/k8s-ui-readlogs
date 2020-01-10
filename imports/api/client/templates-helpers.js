@@ -49,6 +49,14 @@ Template.registerHelper("loadPods", function(){
 Template.registerHelper("loadComponentStatus", function(){
     return loadFetchedData('components');
 });
+
+Template.registerHelper("loadDaemonsets", function(){
+    return loadFetchedData('daemonsets');
+});
+
+Template.registerHelper("loadStatefulsets", function(){
+    return loadFetchedData('statefulsets');
+});
 /*************************** End of data loaders ***************************/
 
 Template.registerHelper("kiToGiga",function(_str_value){
@@ -73,9 +81,11 @@ Template.registerHelper("numberOrZero",function(_num){
     return _num;
 });
 
-Template.registerHelper("arrayCount", function(_arrayCount) {
-    
-    return _arrayCount.length;
+Template.registerHelper("arrayCount", function(_array) {
+    if (Array.isArray(_array)) {
+       return _array.length;
+    }
+    return 0;
 });
 
 Template.registerHelper("hasOneContainer", function(_arrayCount){

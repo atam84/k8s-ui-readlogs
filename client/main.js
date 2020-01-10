@@ -22,8 +22,7 @@ _autoRefresh = {
 */
 _debug = true;
 _app_name = 'k8s-ui-readLogs';
-<<<<<<< HEAD
-_version = 'beta v0.4.1';
+_version = 'beta v0.4.2';
 let _intervalHandler = undefined;
 
 Collections = {};
@@ -39,9 +38,6 @@ Collections.statefulsets = new Mongo.Collection(null);
 Collections.components   = new Mongo.Collection(null);
 Collections._trash       = new Mongo.Collection(null);
 Collections._data        = new Mongo.Collection(null);
-=======
-_version = 'beta v0.3.7';
->>>>>>> master
 
 import './main.html';
 import '../lib/routes';
@@ -56,6 +52,8 @@ import '../imports/ui/services/services';
 import '../imports/ui/mainpage/mainpage';
 import '../imports/ui/events/events';
 import '../imports/ui/deployments/deployments';
+import '../imports/ui/daemonsets/daemonsets';
+import '../imports/ui/statefulsets/statefulsets';
 
 
 Template.refreshControl.events({
