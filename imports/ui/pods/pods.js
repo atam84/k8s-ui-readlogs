@@ -54,8 +54,6 @@ Template.List_namespacePods.helpers({
 });
 
 
-<<<<<<< HEAD
-=======
 let logLoader = () => {
     let _args = {};
     let _path = "";
@@ -85,17 +83,12 @@ let logLoader = () => {
 
 }
 
->>>>>>> master
 Template.pod_Logs.helpers({
     loadPodLogs() {
        logLoader();
     },
     getPodLogs() {
-<<<<<<< HEAD
        return _data.get('podLogs');
-=======
-       return _data.get('pod_logs');
->>>>>>> master
     },
     podLogsTitle() {
         let _args = {};
