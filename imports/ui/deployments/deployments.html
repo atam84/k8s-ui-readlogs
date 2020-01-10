@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each item in getDeployments}}
+                            {{#each item in loadDeployments}}
                             <tr>
                                 <td>{{item.metadata.name}}</td>
                                 <td>{{item.metadata.namespace}}</td>
@@ -29,7 +29,8 @@
                                 <td>{{numberOrZero item.status.availableReplicas}}</td>
                                 <td>{{numberOrZero item.status.updatedReplicas}}</td>
                                 <td>{{arrayCount item.spec.template.spec.containers}}</td>
-                                <td><span class="badge {{TrueFalseClass item.status.conditions.[1].status}}">{{item.status.conditions.[1].type}}</span></td>
+                                <!-- td><span class="badge {{TrueFalseClass item.status.conditions.[1].status}}">{{item.status.conditions.[1].type}}</span></td -->
+                                <td>{{getConditions item.status.conditions}}</td>
                             </tr>
                             {{/each}}
                         </tbody>

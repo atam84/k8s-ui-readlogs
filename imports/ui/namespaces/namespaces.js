@@ -4,16 +4,17 @@ import { Template } from 'meteor/templating';
 import './namespaces.html';
 
 
-Template.List_namespaces.created = () => {
-    if(_debug) {
-        console.log("namespaces: list and trigger autoreload data.");
+Template.List_namespaces.onCreated(function() {
+    if (_debug) {
+       console.log(arguments.callee.name + "() Ask for all namespaces.");
     }
-    askFor('getNameSpaces', 'namespaces', '/namespaces');
-    updateNamespace = Meteor.setInterval(() => {
-        askFor('getNameSpaces', 'namespaces', '/namespaces');
-    }, 5000);
-}
+    _autoRefresh.set('target', "getNameSpaces");
+    _autoRefresh.set('collection', "namespaces");
+    _autoRefresh.set('arguments', undefined);
+    askFor('getNameSpaces', 'namespaces', undefined);
+});
 
+/*
 Template.List_namespaces.helpers({
     get_listNameSpaces() {
         if (_debug) {
@@ -23,13 +24,6 @@ Template.List_namespaces.helpers({
     },
     /**
      * Activate and deactivate the autoupdate
-     */
+     *
 });
-
-
-Template.List_namespaces.destroyed = function() {
-    if(_debug) {
-        console.log("namespaces: remove autoreload data.");
-    }
-    Meteor.clearInterval(updateNamespace);
-};
+*/

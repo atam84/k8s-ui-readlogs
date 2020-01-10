@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm d-inline-block">
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>{{arrayCount getAllEvents}} Events</strong></h5></div>
+                <div class="card-header"><h5><strong>{{arrayCount loadEvents}} Events</strong></h5></div>
                 <div id="pod-infos-block" class="card-body" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <thead>
@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each item in getAllEvents}}
+                            {{#each item in loadEvents}}
                             <tr>
                                 <td><span class="badge {{statusClass item.type}}">{{item.type}}</span></td>
                                 <td>{{item.count}}</td>

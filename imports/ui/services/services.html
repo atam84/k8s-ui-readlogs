@@ -20,46 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{#each item in getAllServices}}
-                        <tr>
-                            <td><a href='/service/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
-                            <td>{{item.metadata.namespace}}</td>
-                            <td>{{dateAndTime item.metadata.creationTimestamp}}</td>
-                            <td>{{item.spec.clusterIP}}</td>
-                            {{#if item.spec.externalTrafficPolicy}}
-                            <td>{{item.spec.externalTrafficPolicy}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-                            {{#if item.spec.ports.[0].nodePort}}
-                            <td>{{item.spec.ports.[0].nodePort}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-
-                            {{#if item.spec.ports.[0].port}}
-                            <td>{{item.spec.ports.[0].port}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-
-                            {{#if item.spec.ports.[0].protocol}}
-                            <td>{{item.spec.ports.[0].protocol}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-
-                            {{#if item.spec.ports.[0].targetPort}}
-                            <td>{{item.spec.ports.[0].targetPort}}</td>
-                            {{else}}
-                            <td>-</td>
-                            {{/if}}
-                            <td>{{item.spec.type}}</td>
-                            {{#each objectToPairs item.status}}
-                            <td>{{key}}</td>
-                            {{/each}}
-                        </tr>
-                    {{/each}}
+                        {{generateTable}}
                     </tbody>
                 </table>
             </div>

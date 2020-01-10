@@ -83,7 +83,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{#each item in getAllPods}}
+                    {{#each item in loadPods}}
                         <tr>
                             <td><a href='/pods/{{item.metadata.namespace}}/{{item.metadata.name}}'>{{item.metadata.name}}</a></td>
                             {{#if hasOneContainer item.spec.containers}}
@@ -138,8 +138,6 @@
         </div>
     </div>
 </template>
-
-
 
 
 <template name='pod_Details'>

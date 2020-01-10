@@ -6,10 +6,17 @@ import './events.html';
 
 
 Template.all_events.helpers({
-    getAllEvents() {
-        if (_debug) {
-            console.log(arguments.callee.name + "() Ask for all events.");
-        }
-        return askFor('getAllEvents', 'all_events', undefined);
-    }
 });
+
+Template.all_events.onCreated(function() {
+    if (_debug) {
+       console.log(arguments.callee.name + "() Ask for all events.");
+    }
+    _autoRefresh.set('target', "getAllEvents");
+    _autoRefresh.set('collection', "events");
+    _autoRefresh.set('arguments', undefined);
+    askFor('getAllEvents', 'events', undefined);
+});
+
+
+
