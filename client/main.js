@@ -22,7 +22,7 @@ _autoRefresh = {
 */
 _debug = true;
 _app_name = 'k8s-ui-readLogs';
-_version = 'beta v0.4.0';
+_version = 'beta v0.4.1';
 let _intervalHandler = undefined;
 
 Collections = {};
