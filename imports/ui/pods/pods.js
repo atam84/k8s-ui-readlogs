@@ -54,12 +54,48 @@ Template.List_namespacePods.helpers({
 });
 
 
+<<<<<<< HEAD
+=======
+let logLoader = () => {
+    let _args = {};
+    let _path = "";
+    let isContainer = FlowRouter.getParam('_container');
+    if(isContainer == 'logs' || isContainer == undefined) {
+        _args = {
+            'namespace': FlowRouter.getParam('_namespace'),
+            'podName': FlowRouter.getParam('_podName'),
+            'container': undefined
+        }
+        path = '/pods/' + _args.namespace + '/' + _args.podName + '/logs';
+    } else {
+         _args = {
+            'namespace': FlowRouter.getParam('_namespace'),
+            'podName': FlowRouter.getParam('_podName'),
+            'container': FlowRouter.getParam('_container')
+        }
+        path = '/pods/' + _args.namespace + '/' + _args.podName + '/' + _args.container + '/logs';
+    }
+
+    let logs = askFor('getPodLogs', 'pod_logs', _path, _args);
+    if (_debug) {
+       console.log(arguments.callee.name + "()  Ask for " + _args.podName + " in namespace : " + _args.namespace + " (" + _args.container + ")");
+       console.log(logs);
+    }
+    return logs;
+
+}
+
+>>>>>>> master
 Template.pod_Logs.helpers({
     loadPodLogs() {
        logLoader();
     },
     getPodLogs() {
+<<<<<<< HEAD
        return _data.get('podLogs');
+=======
+       return _data.get('pod_logs');
+>>>>>>> master
     },
     podLogsTitle() {
         let _args = {};
