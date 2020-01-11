@@ -6,24 +6,26 @@ import './nodes.html';
 
 
 Template.List_nodes.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all nodes.");
     }
     _autoRefresh.set('target', "getNodes");
     _autoRefresh.set('collection', "nodes");
     _autoRefresh.set('arguments', undefined);
-    askFor('getNodes', 'nodes', undefined);
+    askFor('getNodes', 'nodes', undefined); */
+    call_asker('getNodes', 'nodes', 'nodes', undefined, false);
 });
 
 /*
 */
 Template.Details_node.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all nodes.");
     }
     _autoRefresh.set('target', "getNodes");
     _autoRefresh.set('collection', "nodes");
-    _autoRefresh.set('arguments', undefined);
+    _autoRefresh.set('arguments', undefined); */
+    call_asker('getNodes', 'nodes', 'nodes', undefined, false);
 });
 
 

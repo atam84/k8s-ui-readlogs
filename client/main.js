@@ -42,6 +42,7 @@ Collections._data        = new Mongo.Collection(null);
 import './main.html';
 import '../lib/routes';
 
+import '../imports/api/client/callers';
 import '../imports/api/client/helpers';
 import '../imports/api/client/templates-helpers';
 

@@ -7,13 +7,14 @@ import './statefulsets.html';
 
 
 Template.all_statefulsets.onCreated(function() {
-   if (_debug) {
+   /*if (_debug) {
       console.log(arguments.callee.name + "() Ask for all daemonsets.");
    }
    _autoRefresh.set('target', "getStatefulsets");
    _autoRefresh.set('collection', "statefulsets");
    _autoRefresh.set('arguments', undefined);
-   askFor('getStatefulsets', 'statefulsets', undefined);
+   askFor('getStatefulsets', 'statefulsets', undefined); */
+   call_asker('getStatefulsets', 'statefulsets', 'statefulsets', undefined, false);
 });
 
 Template.all_statefulsets.helpers({

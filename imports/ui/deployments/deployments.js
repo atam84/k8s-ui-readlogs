@@ -7,13 +7,14 @@ import './deployments.html';
 
 
 Template.all_deployments.onCreated(function() {
-   if (_debug) {
+   /*if (_debug) {
       console.log(arguments.callee.name + "() Ask for all deployments.");
    }
    _autoRefresh.set('target', "getDeployments");
    _autoRefresh.set('collection', "deployments");
    _autoRefresh.set('arguments', undefined);
-   askFor('getDeployments', 'deployments', undefined);
+   askFor('getDeployments', 'deployments', undefined); */
+   call_asker('getDeployments', 'deployments', 'deployments', undefined, false);
 });
 
 Template.all_deployments.helpers({

@@ -7,13 +7,14 @@ import './daemonsets.html';
 
 
 Template.all_daemonsets.onCreated(function() {
-   if (_debug) {
+   /*if (_debug) {
       console.log(arguments.callee.name + "() Ask for all daemonsets.");
    }
    _autoRefresh.set('target', "getDaemonsets");
    _autoRefresh.set('collection', "daemonsets");
    _autoRefresh.set('arguments', undefined);
-   askFor('getDaemonsets', 'daemonsets', undefined);
+   askFor('getDaemonsets', 'daemonsets', undefined); */
+   call_asker('getDaemonsets', 'daemonsets', 'daemonsets', undefined, false);
 });
 
 Template.all_daemonsets.helpers({
