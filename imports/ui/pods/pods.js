@@ -6,33 +6,36 @@ import './pods.html';
 
 
 Template.List_allPods.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all pods.");
     }
     _autoRefresh.set('target', "getAllPods");
     _autoRefresh.set('collection', "pods");
     _autoRefresh.set('arguments', undefined);
-    askFor('getAllPods', 'pods', undefined);
+    askFor('getAllPods', 'pods', undefined); */
+    call_asker('getAllPods', 'pods', 'pods', undefined, false);
 });
 
 Template.List_namespacePods.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all pods.");
     }
     _autoRefresh.set('target', "getAllPods");
     _autoRefresh.set('collection', "pods");
     _autoRefresh.set('arguments', undefined);
-    askFor('getAllPods', 'pods', undefined);
+    askFor('getAllPods', 'pods', undefined); */
+    call_asker('getAllPods', 'pods', 'pods', undefined, false);
 });
 
 Template.pod_Details.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all pods.");
     }
     _autoRefresh.set('target', "getAllPods");
     _autoRefresh.set('collection', "pods");
     _autoRefresh.set('arguments', undefined);
-    askFor('getAllPods', 'pods', undefined);
+    askFor('getAllPods', 'pods', undefined); */
+    call_asker('getAllPods', 'pods', 'pods', undefined, false);
 });
 
 Template.List_namespacePods.helpers({
@@ -54,39 +57,11 @@ Template.List_namespacePods.helpers({
 });
 
 
-let logLoader = () => {
-    let _args = {};
-    let _path = "";
-    let isContainer = FlowRouter.getParam('_container');
-    if(isContainer == 'logs' || isContainer == undefined) {
-        _args = {
-            'namespace': FlowRouter.getParam('_namespace'),
-            'podName': FlowRouter.getParam('_podName'),
-            'container': undefined
-        }
-        path = '/pods/' + _args.namespace + '/' + _args.podName + '/logs';
-    } else {
-         _args = {
-            'namespace': FlowRouter.getParam('_namespace'),
-            'podName': FlowRouter.getParam('_podName'),
-            'container': FlowRouter.getParam('_container')
-        }
-        path = '/pods/' + _args.namespace + '/' + _args.podName + '/' + _args.container + '/logs';
-    }
-
-    let logs = askFor('getPodLogs', 'pod_logs', _path, _args);
-    if (_debug) {
-       console.log(arguments.callee.name + "()  Ask for " + _args.podName + " in namespace : " + _args.namespace + " (" + _args.container + ")");
-       console.log(logs);
-    }
-    return logs;
-
-}
+Template.pod_Logs.onCreated(function() {
+    logLoader();
+});
 
 Template.pod_Logs.helpers({
-    loadPodLogs() {
-       logLoader();
-    },
     getPodLogs() {
        return _data.get('podLogs');
     },

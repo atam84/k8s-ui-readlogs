@@ -11,23 +11,25 @@ Template.list_services.helpers({
 });
 
 Template.list_services.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all services.");
     }
     _autoRefresh.set('target', "getAllServices");
     _autoRefresh.set('collection', "services");
     _autoRefresh.set('arguments', undefined);
-    askFor('getAllServices', 'services', undefined);
+    askFor('getAllServices', 'services', undefined);*/
+    call_asker('getAllServices', 'services', 'services', undefined, false);
 });
 
 Template.get_service.onCreated(function() {
-    if (_debug) {
+    /*if (_debug) {
        console.log(arguments.callee.name + "() Ask for all services.");
     }
     _autoRefresh.set('target', "getAllServices");
     _autoRefresh.set('collection', "services");
     _autoRefresh.set('arguments', undefined);
-    askFor('getAllServices', 'services', undefined);
+    askFor('getAllServices', 'services', undefined);*/
+    call_asker('getAllServices', 'services', 'services', undefined, false);
 });
 
 
@@ -73,7 +75,6 @@ Template.list_services.helpers({
         return Spacebars.SafeString(corpHTML);
     }
 });
-
 
 
 Template.get_service.helpers({
