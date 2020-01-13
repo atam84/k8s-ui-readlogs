@@ -12,6 +12,7 @@ RUN apt-get update && \
     apt-get install -y nodejs g++ gcc python make build-essential && \
     curl https://install.meteor.com/ | sh  && \
     git clone https://github.com/atam84/k8s-ui-readlogs.git .  && \
+    git checkout current-dev && \
     meteor npm install  && \
     meteor build --allow-superuser --directory ${APP_BASE_DIR} && \
     (cd ${APP_BUNDLE_DIR}/programs/server && npm install --production) && \
