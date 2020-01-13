@@ -1,18 +1,18 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
 }
 
 body {
@@ -20,6 +20,7 @@ body {
 }
 
 h5 {
+  padding-top: 0.5rem;
   margin-bottom: 0px; 
 }
 
@@ -124,5 +125,23 @@ h5 {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+.btn-light {
+  color: #212529;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.card-header {
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+}
+
+.badge {
+  font-size: 85%;
+  border-radius: 0rem;
 }
 

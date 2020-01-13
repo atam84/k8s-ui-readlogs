@@ -2,7 +2,14 @@
     <div class="row" style="height: 750px;" >
         <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Namespace: {{getNamespace}}</strong></h5></div>
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="flex-grow-1"><h5><strong>Pods in namespace: {{getNamespace}}</strong></h5></div>
+                        <div class="d-flex justify-content-end">
+                          <button class="btn btn-light reload-data"><i class="mdi mdi-refresh"></i></button>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body" style="padding: 0rem !important;">
                     <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                         <thead>
@@ -61,7 +68,14 @@
     <div class="row" style="height: 750px;" >
         <div class="col-sm d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
             <div class="card bg-light mb-3">
-                <div class="card-header"><h5><strong>Namespace: {{getNamespace}}</strong></h5></div>
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="flex-grow-1"><h5><strong>Pods</strong></h5></div>
+                        <div class="d-flex justify-content-end">
+                          <button class="btn btn-light reload-data"><i class="mdi mdi-refresh"></i></button>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body" style="padding: 0rem !important;">
                 <table class="table table-striped table-sm" style="margin-bottom: 0px;">
                     <thead>
@@ -121,14 +135,12 @@
         <div class="col-sm h-100 d-inline-block"> <!-- style="overflow-y: auto; overflow-x: auto;" -->
             <div class="card h-100 bg-light mb-3">
                 <div class="card-header">
-                   <div class="row inline-block">
-                     <div class="col-11">
-                       <h4>{{podLogsTitle}}</h4>
-                     </div>
-                     <div class="col">
-                       <button type="button" class="btn btn-primary reloadLog">Reload</button>
-                     </div>
-                   </div>
+                    <div class="d-flex">
+                        <div class="flex-grow-1"><h5><strong>{{podLogsTitle}}</strong></h5></div>
+                        <div class="d-flex justify-content-end">
+                          <button class="btn btn-light reloadLog"><i class="mdi mdi-refresh"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body" style="padding: 0rem !important;">
                     <pre class="pre-scrollable" style="max-height: 100% !important; min-height: 100% !important; padding: 0.5rem !important;">{{getPodLogs}}</pre>
