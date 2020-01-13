@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 //import { k8s } from '@kubernetes/client-node';
 
-const _server_version = 'beta v0.1.6';
+const _server_version = 'beta v0.1.7';
 const _app_name = 'k8s-readLogs-server';
 const k8s = require('@kubernetes/client-node');
 const sizeof = require('object-sizeof');
@@ -14,6 +14,11 @@ const dateNow = () => {
   let seconds = ("0" + date.getSeconds()).slice(-2);
   return [date.getFullYear(), mounth, day].join("-") + " " + [hour, minutes, seconds].join(":");
 
+}
+const lastUpdate = (_object) => {
+  let _obj = _object;
+  _obj.lastUpdate = new Date();
+  return _object;
 }
 const dataSize = (_data, _adaptUnit=true) => {
   let logsize = sizeof(_data);
@@ -42,7 +47,7 @@ Meteor.methods({
     'getNameSpaces': () => {
         console.log(dateNow() + ' *** (NAMESPACES) Serving k8s namespaces');
         return k8sApi.listNamespace().then((res) => {
-          return res.body;
+          return lastUpdate(res.body);
         });
     },
     'getNodes': () => {
@@ -66,6 +71,12 @@ Meteor.methods({
     'getDaemonsets': () => {
       console.log(dateNow() + ' *** (DAEMONSETS) Serving all daemonsets');
       return k8sApiApps.listDaemonSetForAllNamespaces().then((res) => {
+        return res.body;
+      });
+    },
+    'getEndpoints': () => {
+      console.log(dateNow() + ' *** (ENDPOINTS) Serving all Endpoints');
+      return k8sApi.listEndpointsForAllNamespaces().then((res) => {
         return res.body;
       });
     },
