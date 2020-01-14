@@ -1,4 +1,22 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/c3/src/scss/arc.scss";
+@import "../node_modules/c3/src/scss/axis.scss";
+@import "../node_modules/c3/src/scss/brush.scss";
+@import "../node_modules/c3/src/scss/focus.scss";
+@import "../node_modules/c3/src/scss/legend.scss";
+@import "../node_modules/c3/src/scss/main.scss";
+@import "../node_modules/c3/src/scss/region.scss";
+@import "../node_modules/c3/src/scss/text.scss";
+@import "../node_modules/c3/src/scss/tooltip.scss";
+@import "../node_modules/c3/src/scss/area.scss";
+@import "../node_modules/c3/src/scss/bar.scss";
+@import "../node_modules/c3/src/scss/chart.scss";
+@import "../node_modules/c3/src/scss/grid.scss";
+@import "../node_modules/c3/src/scss/line.scss";
+@import "../node_modules/c3/src/scss/point.scss";
+@import "../node_modules/c3/src/scss/select_drag.scss";
+@import "../node_modules/c3/src/scss/title.scss";
+@import "../node_modules/c3/src/scss/zoom.scss";
 
 .bd-placeholder-img {
   font-size: 1.125rem;
